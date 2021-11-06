@@ -5,44 +5,32 @@ import java.awt.event.ActionListener;
 
 public class LoginScreen extends JPanel
 {
-    private JButton login;
-    private JButton signUp;
-    private JButton exit;
+    private JButton loginBtn;
+    private JButton signUpBtn;
+    private JButton exitBtn;
     private ImagePanel imagePanel;
+    private Component c;
     public LoginScreen(MainFrame mf)
     {
+        c = mf.getComponent();
         this.setLayout(null);
         this.setBackground(Color.WHITE);
         imagePanel = new ImagePanel();
         this.add(imagePanel);
 
-        login = new JButton("로그인");
-        login.setBounds(250, 430, 150, 40);
-        this.add(login);
-        login.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                CardLayout cd = mf.getCards();
-                cd.next(mf.getContainer());
-            }
-        });
 
-        signUp = new JButton("회원가입");
-        signUp.setBounds(250, 500, 150, 40);
-        this.add(signUp);
+        loginBtn = new JButton("로그인");
+        loginBtn.setBounds(250, 430, 150, 40);
+        this.add(loginBtn);
+        loginBtn.addActionListener(e -> new loginWindow(c));
 
-        exit = new JButton("종료");
-        exit.setBounds(250, 570, 150, 40);
-        this.add(exit);
-        exit.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                System.exit(0);
-            }
-        });
+        signUpBtn = new JButton("회원가입");
+        signUpBtn.setBounds(250, 500, 150, 40);
+        this.add(signUpBtn);
+
+        exitBtn = new JButton("종료");
+        exitBtn.setBounds(250, 570, 150, 40);
+        this.add(exitBtn);
+        exitBtn.addActionListener(e -> System.exit(0));
     }
 }

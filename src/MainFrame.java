@@ -8,9 +8,11 @@ public class MainFrame extends JFrame
     private LoginScreen loginScreen;
     private MainScreen mainScreen;
     private Container container;
+    private Component c;
 
     public MainFrame()
     {
+        c = this;
         container = getContentPane();
         cards = new CardLayout();
         loginScreen = new LoginScreen(this);
@@ -19,18 +21,14 @@ public class MainFrame extends JFrame
         setTitle("도서관리 시스템");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(700, 700);
+        setLocationRelativeTo(null);
         setResizable(false);
         setLayout(cards);
         container.add(loginScreen, "1");
         container.add(mainScreen, "2");
     }
-
-    public CardLayout getCards()
+    public Component getComponent()
     {
-        return cards;
-    }
-    public Container getContainer()
-    {
-        return container;
+        return c;
     }
 }
