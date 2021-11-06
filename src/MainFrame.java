@@ -4,21 +4,33 @@ import java.awt.event.*;
 
 public class MainFrame extends JFrame
 {
+    private CardLayout cards;
+    private LoginScreen loginScreen;
+    private MainScreen mainScreen;
+    private Container container;
+
     public MainFrame()
     {
+        container = getContentPane();
+        cards = new CardLayout();
+        loginScreen = new LoginScreen(this);
+        mainScreen = new MainScreen();
         setVisible(true);
         setTitle("도서관리 시스템");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setLocationRelativeTo(null);
         setSize(600, 700);
         setResizable(false);
-        this.setLayout(null);
+        setLayout(cards);
+        container.add(loginScreen, "1");
+        container.add(mainScreen, "2");
+    }
 
-        JButton logIn = new JButton("로그인");
-        logIn.setBounds(200, 460, 150, 40);
-        this.add(logIn);
-        JButton signUp = new JButton("회원가입");
-        signUp.setBounds(200, 530, 150, 40);
-        this.add(signUp);
+    public CardLayout getCards()
+    {
+        return cards;
+    }
+    public Container getContainer()
+    {
+        return container;
     }
 }
