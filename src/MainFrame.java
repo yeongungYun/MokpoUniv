@@ -18,7 +18,7 @@ public class MainFrame extends JFrame
         setVisible(true);
         setTitle("도서관리 시스템");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(600, 700);
+        setSize(700, 700);
         setResizable(false);
         setLayout(cards);
         container.add(loginScreen, "1");
