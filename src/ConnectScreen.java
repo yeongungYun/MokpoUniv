@@ -20,7 +20,7 @@ public class ConnectScreen extends JPanel
         this.add(loginBtn);
         loginBtn.addActionListener(e ->
         {
-            if (!LoginWindow.getIsOn())
+            if (!Window.getIsWindowOn())
             {
                 new LoginWindow(mf.getComponent());
             }
@@ -29,6 +29,13 @@ public class ConnectScreen extends JPanel
         signUpBtn = new JButton("회원가입");
         signUpBtn.setBounds(250, 600, 150, 40);
         this.add(signUpBtn);
+        signUpBtn.addActionListener(e ->
+        {
+            if (!Window.getIsWindowOn())
+            {
+                new SignUpWindow(mf.getComponent());
+            }
+        });
 
         exitBtn = new JButton("종료");
         exitBtn.setBounds(250, 670, 150, 40);
