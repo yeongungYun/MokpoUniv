@@ -20,7 +20,7 @@ public class ConnectScreen extends JPanel
         this.add(loginBtn);
         loginBtn.addActionListener(e ->
         {
-            if (!LoginWindow.isOn)
+            if (!LoginWindow.getIsOn())
             {
                 new LoginWindow(mf.getComponent());
             }

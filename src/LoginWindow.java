@@ -3,11 +3,11 @@ import java.awt.*;
 
 public class LoginWindow extends JFrame
 {
-    public static boolean isOn = false; // LoginWindow가 여러 개 뜨지 않기 위해 static 변수 선언
+    private static boolean isOn = false; // LoginWindow가 여러 개 뜨지 않기 위해 static 변수 선언
     private JLabel id;
     private JLabel password;
     private JTextField inputID;
-    private JTextField inputPW;
+    private JPasswordField inputPW;
     private JButton loginBtn;
     private JButton closeBtn;
 
@@ -35,7 +35,7 @@ public class LoginWindow extends JFrame
         password.setBounds(30, 60, 80, 25);
         add(password);
 
-        inputPW = new JTextField(10);
+        inputPW = new JPasswordField(10);
         inputPW.setBounds(100, 60, 140, 25);
         add(inputPW);
 
@@ -53,5 +53,10 @@ public class LoginWindow extends JFrame
             dispose(); // 해당 창만 종료
         });
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); // 프레임의 X키를 눌러도 창이 종료되지 않음
+    }
+
+    public static boolean getIsOn()
+    {
+        return isOn;
     }
 }
