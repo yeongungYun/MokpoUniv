@@ -20,7 +20,7 @@ public class MainFrame extends JFrame
         setVisible(true);
         setTitle("도서관리 시스템");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 700);
+        setSize(700, 800);
         setLocationRelativeTo(null); // 화면의 중앙에 창이 뜸
         setResizable(false); // 창 크기 변경 불가
         

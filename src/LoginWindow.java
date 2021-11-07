@@ -14,7 +14,7 @@ public class LoginWindow extends JFrame
     public LoginWindow(Component c)
     {
         isOn = true;
-        setSize(300, 200);
+        setSize(300, 180);
         setTitle("로그인");
         setLocationRelativeTo(c);
         setResizable(false);
@@ -23,7 +23,7 @@ public class LoginWindow extends JFrame
 
         id = new JLabel("아이디");
         id.setFont(new Font("맑은고딕", Font.BOLD, 14));
-        id.setBounds(30, 20, 80, 25);
+        id.setBounds(40, 20, 80, 25);
         add(id);
 
         inputID = new JTextField(10);
@@ -53,6 +53,5 @@ public class LoginWindow extends JFrame
             dispose(); // 해당 창만 종료
         });
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); // 프레임의 X키를 눌러도 창이 종료되지 않음
-
     }
 }

@@ -13,11 +13,10 @@ public class ConnectScreen extends JPanel
     {
         setLayout(null);
         imagePanel = new ImagePanel("src/MainImage_temp.png");
-        add(imagePanel);
         setBackground(Color.LIGHT_GRAY);
 
         loginBtn = new JButton("로그인");
-        loginBtn.setBounds(250, 430, 150, 40);
+        loginBtn.setBounds(250, 530, 150, 40);
         this.add(loginBtn);
         loginBtn.addActionListener(e ->
         {
@@ -28,12 +27,14 @@ public class ConnectScreen extends JPanel
         });
 
         signUpBtn = new JButton("회원가입");
-        signUpBtn.setBounds(250, 500, 150, 40);
+        signUpBtn.setBounds(250, 600, 150, 40);
         this.add(signUpBtn);
 
         exitBtn = new JButton("종료");
-        exitBtn.setBounds(250, 570, 150, 40);
+        exitBtn.setBounds(250, 670, 150, 40);
         this.add(exitBtn);
         exitBtn.addActionListener(e -> System.exit(0));
+
+        add(imagePanel);
     }
 }
