@@ -6,12 +6,12 @@ import java.io.File;
 public class ImagePanel extends JPanel
 {
     Image mainImage;
-    public ImagePanel()
+    public ImagePanel(String imageAddr)
     {
         this.setBounds(0, 0, 700, 400);
         try
         {
-            mainImage = ImageIO.read(new File("src/MainImage_temp.png"));
+            mainImage = ImageIO.read(new File(imageAddr));
             mainImage = mainImage.getScaledInstance(700, 400, Image.SCALE_SMOOTH);
         }
         catch (Exception e)
