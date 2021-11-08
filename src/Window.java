@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 
 public class Window extends JFrame
 {
@@ -7,12 +10,23 @@ public class Window extends JFrame
 
     public Window()
     {
+        isWindowOn = true;
         setTitle("로그인");
         setResizable(false);
         setVisible(true);
         setLayout(null);
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); // 프레임의 X키를 눌러도 창이 종료되지 않음
+
+        this.addWindowListener(new WindowAdapter()
+        {
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                isWindowOn = false;
+                dispose();
+            }
+        });
     }
+
 
     protected static boolean getIsWindowOn()
     {

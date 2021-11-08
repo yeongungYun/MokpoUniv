@@ -43,7 +43,6 @@ public class LoginWindow extends Window
             JOptionPane.showMessageDialog(null, text, "아이디", JOptionPane.ERROR_MESSAGE);
         });
 
-
         closeButton = new JButton("닫기");
         closeButton.setBounds(150, 100, 85, 30);
         add(closeButton);
