@@ -8,15 +8,15 @@ public class MainFrame extends JFrame
     private MainScreen mainScreen;
     private Container container;
     private Component c;
-    private MembersDBManager mDBm;
+    private MembersDBManager membersDB;
 
-    public MainFrame(MembersDBManager mDBm)
+    public MainFrame(MembersDBManager membersDB)
     {
-        this.mDBm = mDBm;
-        c = this; // 컴포넌트. 다른 Window창들의 setLocationRelativeTo를 위해 존재함
+        this.membersDB = membersDB;
+        c = this; // 컴포넌트. 다른 Window 창들의 setLocationRelativeTo를 위해 존재함
         container = getContentPane(); // 컨테이너. CardLayout과 연결
         cards = new CardLayout();
-        connectScreen = new ConnectScreen(this, mDBm);
+        connectScreen = new ConnectScreen(this);
         mainScreen = new MainScreen();
 
         setVisible(true);
@@ -33,5 +33,15 @@ public class MainFrame extends JFrame
     public Component getComponent()
     {
         return c;
+    }
+    public MembersDBManager getmembersDB() { return membersDB; }
+
+    public void LoginSuccess(boolean b, String id) // 로그인 성공시 메인스크린으로 넘어감
+    {
+        if (b)
+        {
+            mainScreen.setId(id);
+            cards.next(container);
+        }
     }
 }

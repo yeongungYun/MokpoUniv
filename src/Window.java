@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -8,10 +7,10 @@ public class Window extends JFrame
 {
     protected static boolean isWindowOn = false;
 
-    public Window()
+    public Window(String title)
     {
         isWindowOn = true;
-        setTitle("로그인");
+        setTitle(title);
         setResizable(false);
         setVisible(true);
         setLayout(null);
@@ -19,7 +18,7 @@ public class Window extends JFrame
         this.addWindowListener(new WindowAdapter()
         {
             @Override
-            public void windowClosing(WindowEvent e)
+            public void windowClosing(WindowEvent e) // 상단 표시줄의 X를 눌렀을 때 이벤트
             {
                 isWindowOn = false;
                 dispose();

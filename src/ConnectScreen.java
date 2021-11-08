@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ConnectScreen extends JPanel
 {
@@ -10,7 +8,7 @@ public class ConnectScreen extends JPanel
     private JButton exitBtn;
     private ImagePanel imagePanel;
 
-    public ConnectScreen(MainFrame mf, MembersDBManager mDBm)
+    public ConnectScreen(MainFrame mf)
     {
         setLayout(null);
         imagePanel = new ImagePanel("src/MainImage_temp.png");
@@ -23,7 +21,7 @@ public class ConnectScreen extends JPanel
         {
             if (!Window.getIsWindowOn())
             {
-                new LoginWindow(mf.getComponent(), mDBm);
+                new LoginWindow(mf);
             }
         });
 
@@ -34,7 +32,7 @@ public class ConnectScreen extends JPanel
         {
             if (!Window.getIsWindowOn())
             {
-                new SignUpWindow(mf.getComponent());
+                new SignUpWindow(mf);
             }
         });
 

@@ -2,7 +2,6 @@ public class Main
 {
     public static void main(String[] args)
     {
-        new MainFrame(new MembersDBManager());
+        new MainFrame(new MembersDBManager("members", "member"));
     }
-    // test
 }
