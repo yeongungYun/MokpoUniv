@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginWindow extends Window
 {
@@ -10,7 +12,7 @@ public class LoginWindow extends Window
     private JButton loginButton;
     private JButton closeButton;
 
-    public LoginWindow(Component c)
+    public LoginWindow(Component c, MembersDBManager mDBm)
     {
         super();
         setSize(300, 190);
@@ -37,11 +39,19 @@ public class LoginWindow extends Window
         loginButton = new JButton("로그인");
         loginButton.setBounds(40, 100, 85, 30);
         add(loginButton);
-        loginButton.addActionListener(e ->
+        loginButton.addActionListener(new ActionListener()
         {
-            String text = idInputField.getText();
-            JOptionPane.showMessageDialog(null, text, "아이디", JOptionPane.ERROR_MESSAGE);
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                String id = idInputField.getText();
+                String password = new String(passwordInputField.getPassword());
+                JOptionPane.showMessageDialog(null, mDBm.leaveLoginMessage(id, password), "로그인", JOptionPane.ERROR_MESSAGE);
+            }
         });
+
+//      JOptionPane.showMessageDialog(null, text, "아이디", JOptionPane.ERROR_MESSAGE);
+
 
         closeButton = new JButton("닫기");
         closeButton.setBounds(150, 100, 85, 30);
@@ -52,4 +62,5 @@ public class LoginWindow extends Window
             dispose(); // 해당 창만 종료
         });
     }
+
 }

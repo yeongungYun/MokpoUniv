@@ -8,13 +8,15 @@ public class MainFrame extends JFrame
     private MainScreen mainScreen;
     private Container container;
     private Component c;
+    private MembersDBManager mDBm;
 
-    public MainFrame()
+    public MainFrame(MembersDBManager mDBm)
     {
+        this.mDBm = mDBm;
         c = this; // 컴포넌트. 다른 Window창들의 setLocationRelativeTo를 위해 존재함
         container = getContentPane(); // 컨테이너. CardLayout과 연결
         cards = new CardLayout();
-        connectScreen = new ConnectScreen(this);
+        connectScreen = new ConnectScreen(this, mDBm);
         mainScreen = new MainScreen();
 
         setVisible(true);

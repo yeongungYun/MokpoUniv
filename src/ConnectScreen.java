@@ -9,7 +9,8 @@ public class ConnectScreen extends JPanel
     private JButton signUpBtn;
     private JButton exitBtn;
     private ImagePanel imagePanel;
-    public ConnectScreen(MainFrame mf)
+
+    public ConnectScreen(MainFrame mf, MembersDBManager mDBm)
     {
         setLayout(null);
         imagePanel = new ImagePanel("src/MainImage_temp.png");
@@ -22,7 +23,7 @@ public class ConnectScreen extends JPanel
         {
             if (!Window.getIsWindowOn())
             {
-                new LoginWindow(mf.getComponent());
+                new LoginWindow(mf.getComponent(), mDBm);
             }
         });
 
