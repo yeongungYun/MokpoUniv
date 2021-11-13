@@ -35,6 +35,5 @@ public class LogoutWindow extends Window
         });
 
         add(closeButton);
-
     }
 }

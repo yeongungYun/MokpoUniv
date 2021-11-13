@@ -94,5 +94,4 @@ public class LoginWindow extends Window
             dispose();
         });
     }
-
 }

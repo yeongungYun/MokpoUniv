@@ -41,7 +41,6 @@ public class MainFrame extends JFrame
 
     public void loginSuccess(String id) // 로그인 성공시 메인스크린으로 넘어감
     {
-        mainScreen.setId(id);
         Window.isWindowOn = false;
         cards.next(container);
     }
