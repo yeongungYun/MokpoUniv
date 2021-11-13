@@ -18,7 +18,6 @@ public class MembersDBManager
         String userName = "root";
         // password = 데이터베이스 비밀번호
         String password = "root12345";
-
         try
         {
             connection = DriverManager.getConnection(url, userName, password);

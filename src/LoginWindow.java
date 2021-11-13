@@ -72,14 +72,14 @@ public class LoginWindow extends Window
             }
             else
             {
-                if (!mf.getmembersDB().tryLogin(id, password))
+                if (!mf.getMembersDB().tryLogin(id, password))
                 {
                     JOptionPane.showMessageDialog(null, "로그인 실패",
                             "로그인", JOptionPane.ERROR_MESSAGE);
                 }
                 else
                 {
-                    mf.LoginSuccess(true, id);
+                    mf.loginSuccess(id);
                     dispose();
                 }
             }
@@ -91,7 +91,7 @@ public class LoginWindow extends Window
         closeButton.addActionListener(e ->
         {
             Window.isWindowOn = false;
-            dispose(); // 해당 창만 종료
+            dispose();
         });
     }
 

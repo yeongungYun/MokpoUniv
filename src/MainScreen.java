@@ -5,50 +5,61 @@ public class MainScreen extends JPanel
 {
     JLabel welcome;
 
-    JButton printBooksButton;
-    JButton searchBookButton;
-    JButton borrowBookButton;
-    JButton reserveBookButton;
-    JButton returnBookButton;
-    JButton myBookInfoButton;
-    JButton addOrRemoveBookButton;
+    JButton searchButton;
+    JButton borrowOrReserveButton;
+    JButton myInfoButton;
+    JButton addOrRemoveButton;
+    JButton logoutButton;
 
     String id;
 
-    public MainScreen()
+    public MainScreen(MainFrame mf)
     {
         this.setLayout(null);
 
         welcome = new JLabel();
         welcome.setFont(new Font("맑은고딕", Font.BOLD, 14));
 
-        printBooksButton = new JButton("도서 리스트 출력");
-        printBooksButton.setBounds(130, 150, 150, 40);
-        this.add(printBooksButton);
+        searchButton = new JButton("도서 검색");
+        searchButton.setBounds(130, 150, 150, 40);
+        searchButton.addActionListener(e ->
+        {
+            if (!Window.isWindowOn)
+            {
+                new SearchWindow(mf);
+            }
+        });
+        add(searchButton);
 
-        searchBookButton = new JButton("도서 검색");
-        searchBookButton.setBounds(130, 270, 150, 40);
-        this.add(searchBookButton);
+        borrowOrReserveButton = new JButton("도서 대출/예약");
+        borrowOrReserveButton.setBounds(130, 270, 150, 40);
+        add(borrowOrReserveButton);
 
-        borrowBookButton = new JButton("도서 대출");
-        borrowBookButton.setBounds(130, 390, 150, 40);
-        this.add(borrowBookButton);
+        myInfoButton = new JButton("내 도서 정보");
+        myInfoButton.setBounds(380, 270, 150, 40);
+        myInfoButton.addActionListener(e ->
+        {
+            if (!Window.isWindowOn)
+            {
+                new MyInfoWindow(mf);
+            }
+        });
+        add(myInfoButton);
 
-        reserveBookButton = new JButton("도서 예약");
-        reserveBookButton.setBounds(130, 510, 150, 40);
-        this.add(reserveBookButton);
+        addOrRemoveButton = new JButton("도서 추가/삭제");
+        addOrRemoveButton.setBounds(380, 390, 150, 40);
+        add(addOrRemoveButton);
 
-        returnBookButton = new JButton("도서 반납");
-        returnBookButton.setBounds(380, 150, 150, 40);
-        this.add(returnBookButton);
-
-        myBookInfoButton = new JButton("내 도서 정보");
-        myBookInfoButton.setBounds(380, 270, 150, 40);
-        this.add(myBookInfoButton);
-
-        addOrRemoveBookButton = new JButton("도서 추가/삭제");
-        addOrRemoveBookButton.setBounds(380, 390, 150, 40);
-        this.add(addOrRemoveBookButton);
+        logoutButton = new JButton("로그아웃");
+        logoutButton.setBounds(550, 700, 120, 40);
+        logoutButton.addActionListener(e ->
+        {
+            if (!Window.isWindowOn)
+            {
+                new LogoutWindow(mf);
+            }
+        });
+        add(logoutButton);
     }
 
     public void setId(String id)
