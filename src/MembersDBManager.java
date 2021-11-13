@@ -8,7 +8,7 @@ public class MembersDBManager
     private Statement statement;
     private ResultSet resultSet;
 
-    public MembersDBManager(String database, String table)
+    public MembersDBManager(String database)
     {
         this.table = table;
 
@@ -33,7 +33,7 @@ public class MembersDBManager
     public boolean tryLogin(String id, String password) // 로그인 시도
     {
         boolean ret;
-        String sql = "select password from " + table + " where id = '" + id + "';";
+        String sql = "select password from member where id = '" + id + "';";
         try
         {
             resultSet = statement.executeQuery(sql);
@@ -71,7 +71,7 @@ public class MembersDBManager
             }
             else
             {
-                insertSql = "insert into " + table + " values( '" + id + "', '" + password + "');";
+                insertSql = "insert into member values( '" + id + "', '" + password + "');";
                 statement.executeUpdate(insertSql);
                 message = "회원가입 성공";
             }
