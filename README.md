@@ -13,3 +13,7 @@
 - 각종 Window 구현
 - 디자인 패턴 적용
 - 리펙토링
+
+
+### 메인 스크린 예상도
+![메인스크린 예상도](https://user-images.githubusercontent.com/57798944/141650068-077929d7-bd66-4c24-9a57-ccbe134e3ca8.png)
