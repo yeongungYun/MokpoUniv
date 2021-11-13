@@ -1,6 +1,6 @@
-public class AddOrRemoveButton extends Window
+public class AddOrRemoveWindow extends Window
 {
-    public AddOrRemoveButton(MainFrame mf)
+    public AddOrRemoveWindow(MainFrame mf)
     {
         super("도서 추가/삭제");
         setSize(500, 650);
