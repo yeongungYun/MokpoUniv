@@ -8,7 +8,8 @@
 ![도서관리 시스템 클래스 다이어그램](https://user-images.githubusercontent.com/57798944/141615323-e843252f-b566-40d8-a173-80c2dbae4df7.png)
 
 ### 해야 할 일
-- 검색하면 테이블이 바뀌는 것 구현
+#### MainSceen에 도서 리스트 달고 옆에 각종 버튼 달기
+
 - 각종 Window 구현
 - 디자인 패턴 적용
 - 리펙토링
