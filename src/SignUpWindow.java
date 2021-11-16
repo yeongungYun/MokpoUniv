@@ -101,7 +101,7 @@ public class SignUpWindow extends Window
             }
             else
             {
-                JOptionPane.showMessageDialog(null, mf.getmembersDB().trySignUp(id, password),
+                JOptionPane.showMessageDialog(null, mf.getMembersDB().trySignUp(id, password),
                         "로그인", JOptionPane.ERROR_MESSAGE);
             }
         });

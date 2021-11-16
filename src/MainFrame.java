@@ -9,15 +9,17 @@ public class MainFrame extends JFrame
     private Container container;
     private Component c;
     private MembersDBManager membersDB;
+    private BooksDBManager booksDB;
 
-    public MainFrame(MembersDBManager membersDB)
+    public MainFrame(MembersDBManager membersDB, BooksDBManager booksDB)
     {
         this.membersDB = membersDB;
+        this.booksDB = booksDB;
         c = this; // 컴포넌트. 다른 Window 창들의 setLocationRelativeTo를 위해 존재함
         container = getContentPane(); // 컨테이너. CardLayout과 연결
         cards = new CardLayout();
         connectScreen = new ConnectScreen(this);
-        mainScreen = new MainScreen();
+        mainScreen = new MainScreen(this);
 
         setVisible(true);
         setTitle("도서관리 시스템");
@@ -34,14 +36,16 @@ public class MainFrame extends JFrame
     {
         return c;
     }
-    public MembersDBManager getmembersDB() { return membersDB; }
+    public MembersDBManager getMembersDB() { return membersDB; }
+    public BooksDBManager getBooksDB() {return booksDB; }
 
-    public void LoginSuccess(boolean b, String id) // 로그인 성공시 메인스크린으로 넘어감
+    public void loginSuccess(String id) // 로그인 성공시 메인스크린으로 넘어감
     {
-        if (b)
-        {
-            mainScreen.setId(id);
-            cards.next(container);
-        }
+        Window.isWindowOn = false;
+        cards.next(container);
+    }
+    public void logout()
+    {
+        cards.next(container);
     }
 }

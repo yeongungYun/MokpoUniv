@@ -26,7 +26,6 @@ public class Window extends JFrame
         });
     }
 
-
     protected static boolean getIsWindowOn()
     {
         return isWindowOn;

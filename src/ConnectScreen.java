@@ -11,7 +11,7 @@ public class ConnectScreen extends JPanel
     public ConnectScreen(MainFrame mf)
     {
         setLayout(null);
-        imagePanel = new ImagePanel("src/MainImage_temp.png");
+        imagePanel = new ImagePanel("img/MainImage_temp.png");
         setBackground(Color.LIGHT_GRAY);
 
         loginBtn = new JButton("로그인");
