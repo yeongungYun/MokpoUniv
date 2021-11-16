@@ -2,6 +2,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        new MainFrame(new MembersDBManager("members", "member"));
+        new MainFrame(new MembersDBManager("members" , "member")
+        );
     }
 }

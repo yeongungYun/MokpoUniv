@@ -12,6 +12,7 @@ public class MainScreen extends JPanel
     JButton returnBookButton;
     JButton myBookInfoButton;
     JButton addOrRemoveBookButton;
+    JButton logoutButton;
 
     String id;
 
@@ -24,31 +25,35 @@ public class MainScreen extends JPanel
 
         printBooksButton = new JButton("도서 리스트 출력");
         printBooksButton.setBounds(130, 150, 150, 40);
-        this.add(printBooksButton);
+        add(printBooksButton);
 
         searchBookButton = new JButton("도서 검색");
         searchBookButton.setBounds(130, 270, 150, 40);
-        this.add(searchBookButton);
+        add(searchBookButton);
 
         borrowBookButton = new JButton("도서 대출");
         borrowBookButton.setBounds(130, 390, 150, 40);
-        this.add(borrowBookButton);
+        add(borrowBookButton);
 
         reserveBookButton = new JButton("도서 예약");
         reserveBookButton.setBounds(130, 510, 150, 40);
-        this.add(reserveBookButton);
+        add(reserveBookButton);
 
         returnBookButton = new JButton("도서 반납");
         returnBookButton.setBounds(380, 150, 150, 40);
-        this.add(returnBookButton);
+        add(returnBookButton);
 
         myBookInfoButton = new JButton("내 도서 정보");
         myBookInfoButton.setBounds(380, 270, 150, 40);
-        this.add(myBookInfoButton);
+        add(myBookInfoButton);
 
         addOrRemoveBookButton = new JButton("도서 추가/삭제");
         addOrRemoveBookButton.setBounds(380, 390, 150, 40);
-        this.add(addOrRemoveBookButton);
+        add(addOrRemoveBookButton);
+
+        logoutButton = new JButton("로그아웃");
+        logoutButton.setBounds(580, 710, 90, 40);
+        add(logoutButton);
     }
 
     public void setId(String id)

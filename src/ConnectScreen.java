@@ -27,7 +27,7 @@ public class ConnectScreen extends JPanel
 
         signUpBtn = new JButton("회원가입");
         signUpBtn.setBounds(250, 600, 150, 40);
-        this.add(signUpBtn);
+        add(signUpBtn);
         signUpBtn.addActionListener(e ->
         {
             if (!Window.getIsWindowOn())
@@ -38,7 +38,7 @@ public class ConnectScreen extends JPanel
 
         exitBtn = new JButton("종료");
         exitBtn.setBounds(250, 670, 150, 40);
-        this.add(exitBtn);
+        add(exitBtn);
         exitBtn.addActionListener(e -> System.exit(0));
 
         add(imagePanel);
