@@ -1,43 +1,31 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class ConnectScreen extends JPanel
+public class InitialScreen extends JPanel
 {
     private JButton loginBtn;
     private JButton signUpBtn;
     private JButton exitBtn;
     private ImagePanel imagePanel;
 
-    public ConnectScreen(MainFrame mf)
+    public InitialScreen(MainFrame mf)
     {
         setLayout(null);
         imagePanel = new ImagePanel("img/MainImage_temp.png");
         setBackground(Color.LIGHT_GRAY);
 
         loginBtn = new JButton("로그인");
-        loginBtn.setBounds(250, 530, 150, 40);
+        loginBtn.setBounds(260, 530, 150, 40);
         this.add(loginBtn);
-        loginBtn.addActionListener(e ->
-        {
-            if (!Window.getIsWindowOn())
-            {
-                new LoginWindow(mf);
-            }
-        });
+        loginBtn.addActionListener(e -> new LoginDialog(mf));
 
         signUpBtn = new JButton("회원가입");
-        signUpBtn.setBounds(250, 600, 150, 40);
+        signUpBtn.setBounds(260, 600, 150, 40);
         add(signUpBtn);
-        signUpBtn.addActionListener(e ->
-        {
-            if (!Window.getIsWindowOn())
-            {
-                new SignUpWindow(mf);
-            }
-        });
+        signUpBtn.addActionListener(e -> new SignUpDialog(mf));
 
         exitBtn = new JButton("종료");
-        exitBtn.setBounds(250, 670, 150, 40);
+        exitBtn.setBounds(260, 670, 150, 40);
         add(exitBtn);
         exitBtn.addActionListener(e -> System.exit(0));
 

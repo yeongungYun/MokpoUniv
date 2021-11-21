@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginWindow extends Window
+public class LoginDialog extends JDialog
 {
     private JLabel idLabel;
     private JLabel idRule;
@@ -14,12 +14,19 @@ public class LoginWindow extends Window
     private JButton loginButton;
     private JButton closeButton;
 
-    public LoginWindow(MainFrame mf)
+    private LoginButtonListener listener;
+
+    public LoginDialog(MainFrame mf)
     {
-        super("로그인");
+        super(mf, "로그인");
 
         setSize(300, 190);
         setLocationRelativeTo(mf.getComponent());
+        setLayout(null);
+
+        setModalityType(ModalityType.DOCUMENT_MODAL);
+
+        listener = new LoginButtonListener(mf, this);
 
         idLabel = new JLabel("아이디");
         idLabel.setFont(new Font("맑은고딕", Font.BOLD, 14));
@@ -50,48 +57,34 @@ public class LoginWindow extends Window
         passwordInputField = new JPasswordField(10);
         passwordInputField.setBounds(100, 60, 140, 25);
         add(passwordInputField);
-
         //
 
         loginButton = new JButton("로그인");
         loginButton.setBounds(40, 100, 85, 30);
         add(loginButton);
-        loginButton.addActionListener(e ->
-        {
-            String id = idInputField.getText();
-            String password = new String(passwordInputField.getPassword());
-            if (id.equals(""))
-            {
-                JOptionPane.showMessageDialog(null, "아이디를 입력하세요",
-                        "로그인", JOptionPane.ERROR_MESSAGE);
-            }
-            else if (password.equals(""))
-            {
-                JOptionPane.showMessageDialog(null, "비밀번호를 입력하세요",
-                        "로그인", JOptionPane.ERROR_MESSAGE);
-            }
-            else
-            {
-                if (!mf.getMembersDB().tryLogin(id, password))
-                {
-                    JOptionPane.showMessageDialog(null, "로그인 실패",
-                            "로그인", JOptionPane.ERROR_MESSAGE);
-                }
-                else
-                {
-                    mf.loginSuccess(id);
-                    dispose();
-                }
-            }
-        });
+        loginButton.addActionListener(listener);
 
         closeButton = new JButton("닫기");
         closeButton.setBounds(150, 100, 85, 30);
         add(closeButton);
-        closeButton.addActionListener(e ->
-        {
-            Window.isWindowOn = false;
-            dispose();
-        });
+        closeButton.addActionListener(e -> dispose());
+
+        setResizable(false);
+        setVisible(true);
+    }
+
+    public String getId()
+    {
+        return idInputField.getText();
+    }
+    public String getPassword()
+    {
+        return new String(passwordInputField.getPassword());
+    }
+
+    public void initAll()
+    {
+        idInputField.setText("");
+        passwordInputField.setText("");
     }
 }

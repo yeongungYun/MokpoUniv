@@ -4,21 +4,17 @@ import java.awt.*;
 public class MainFrame extends JFrame
 {
     private CardLayout cards;
-    private ConnectScreen connectScreen;
+    private InitialScreen initialScreen;
     private MainScreen mainScreen;
     private Container container;
     private Component c;
-    private MembersDBManager membersDB;
-    private BooksDBManager booksDB;
 
-    public MainFrame(MembersDBManager membersDB, BooksDBManager booksDB)
+    public MainFrame()
     {
-        this.membersDB = membersDB;
-        this.booksDB = booksDB;
-        c = this; // 컴포넌트. 다른 Window 창들의 setLocationRelativeTo를 위해 존재함
+        c = this; // Dialog의 처음 위치 지정을 위해
         container = getContentPane(); // 컨테이너. CardLayout과 연결
         cards = new CardLayout();
-        connectScreen = new ConnectScreen(this);
+        initialScreen = new InitialScreen(this);
         mainScreen = new MainScreen(this);
 
         setVisible(true);
@@ -29,22 +25,15 @@ public class MainFrame extends JFrame
         setResizable(false); // 창 크기 변경 불가
         
         setLayout(cards);
-        container.add(connectScreen, "1");
+        container.add(initialScreen, "1");
         container.add(mainScreen, "2");
     }
     public Component getComponent()
     {
         return c;
     }
-    public MembersDBManager getMembersDB() { return membersDB; }
-    public BooksDBManager getBooksDB() {return booksDB; }
 
-    public void loginSuccess(String id) // 로그인 성공시 메인스크린으로 넘어감
-    {
-        Window.isWindowOn = false;
-        cards.next(container);
-    }
-    public void logout()
+    public void changeScreen() // 로그인 성공 / 로그이웃 시 스크린 교체
     {
         cards.next(container);
     }
