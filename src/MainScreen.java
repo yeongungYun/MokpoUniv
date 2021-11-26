@@ -11,7 +11,7 @@ public class MainScreen extends JPanel
     private JButton searchButton;
     private JButton resetButton;
 
-    private BookTable bookTable;
+    private BookListPanel bookTable;
 
     private JPanel buttonPanel;
     private JButton myBookInfo;
@@ -22,13 +22,15 @@ public class MainScreen extends JPanel
     private JButton removeBook;
     private JButton logoutButton;
 
-    MainScreenButtonListener listener;
+    MainScreenListener listener;
+
+    String id = null;
 
     public MainScreen(MainFrame mf)
     {
         this.setLayout(new BorderLayout());
 
-        listener = new MainScreenButtonListener(this);
+        listener = new MainScreenListener(mf, this);
 
         searchPanel = new JPanel();
         searchPanel.setLayout(new FlowLayout());
@@ -55,12 +57,12 @@ public class MainScreen extends JPanel
         searchBar.setPreferredSize(new Dimension(80, 30));
         searchPanel.add(searchBar);
 
-        searchButton = new JButton(MainScreenConst.SEARCH);
+        searchButton = new JButton(Const.SEARCH);
         searchButton.setPreferredSize(new Dimension(70, 28));
         searchButton.addActionListener(listener);
         searchPanel.add(searchButton);
 
-        resetButton = new JButton(MainScreenConst.RESET);
+        resetButton = new JButton(Const.RESET);
         resetButton.setPreferredSize(new Dimension(80, 28));
         resetButton.addActionListener(listener);
         searchPanel.add(resetButton);
@@ -73,49 +75,54 @@ public class MainScreen extends JPanel
         add(buttonPanel, BorderLayout.EAST);
         Font font = new Font("맑은고딕", Font.BOLD, 14);
 
-        myBookInfo = new JButton(MainScreenConst.MY_INFORMATION);
+        myBookInfo = new JButton(Const.MY_INFORMATION);
         myBookInfo.setBounds(10, 10, 100, 40);
         myBookInfo.setFont(font);
         buttonPanel.add(myBookInfo);
 
-        borrowBook = new JButton(MainScreenConst.BORROW);
+        borrowBook = new JButton(Const.BORROW);
         borrowBook.setBounds(10, 110, 100, 40);
         borrowBook.setFont(font);
+        borrowBook.addActionListener(listener);
         buttonPanel.add(borrowBook);
 
-        returnBook = new JButton(MainScreenConst.RETURN);
+        returnBook = new JButton(Const.RETURN);
         returnBook.setBounds(10, 200, 100, 40);
         returnBook.setFont(font);
+        returnBook.addActionListener(listener);
         buttonPanel.add(returnBook);
 
-        reserveBook = new JButton(MainScreenConst.RESERVE);
+        reserveBook = new JButton(Const.RESERVE);
         reserveBook.setBounds(10, 290, 100, 40);
         reserveBook.setFont(font);
+        reserveBook.addActionListener(listener);
         buttonPanel.add(reserveBook);
 
-        addBook = new JButton(MainScreenConst.ADD);
+        addBook = new JButton(Const.ADD);
         addBook.setBounds(10, 380, 100, 40);
         addBook.setFont(font);
         buttonPanel.add(addBook);
 
-        removeBook = new JButton(MainScreenConst.REMOVE);
+        removeBook = new JButton(Const.REMOVE);
         removeBook.setBounds(10, 470, 100, 40);
         removeBook.setFont(font);
         buttonPanel.add(removeBook);
 
-        logoutButton = new JButton(MainScreenConst.LOGOUT);
+        logoutButton = new JButton(Const.LOGOUT);
         logoutButton.setBounds(10, 650, 100, 40);
         logoutButton.setFont(font);
-        logoutButton.addActionListener(e -> new LogoutDialog(mf));
+        logoutButton.addActionListener(listener);
         buttonPanel.add(logoutButton);
 
         //
 
-        bookTable = new BookTable();
+        bookTable = new BookListPanel();
         add(bookTable, BorderLayout.CENTER);
     }
 
-    public BookTable getTable()
+    public void setId(String id) { this.id = id; }
+    public String getId() { return id; }
+    public BookListPanel getTablePanel()
     {
         return bookTable;
     }

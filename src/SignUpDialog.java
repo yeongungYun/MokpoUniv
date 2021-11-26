@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class SignUpDialog extends JDialog
@@ -18,11 +17,11 @@ public class SignUpDialog extends JDialog
     private JButton signUpButton;
     private JButton closeButton;
 
-    private SignUpButtonListener listener;
+    private SignUpListener listener;
 
-    public SignUpDialog(MainFrame mf)
+    public SignUpDialog(MainFrame mf, String title)
     {
-        super(mf, "회원가입");
+        super(mf, title);
 
         setSize(300, 250);
         setLocationRelativeTo(mf.getComponent());
@@ -30,7 +29,7 @@ public class SignUpDialog extends JDialog
 
         setModalityType(ModalityType.DOCUMENT_MODAL);
 
-        listener = new SignUpButtonListener(this);
+        listener = new SignUpListener(this);
 
         idLabel = new JLabel("아이디");
         idLabel.setFont(new Font("맑은고딕", Font.BOLD, 13));
@@ -76,12 +75,12 @@ public class SignUpDialog extends JDialog
 
         //
 
-        signUpButton = new JButton(SignUpConst.SIGNUP);
+        signUpButton = new JButton(Const.SIGNUP);
         signUpButton.setBounds(40, 160, 85, 30);
         add(signUpButton);
         signUpButton.addActionListener(listener);
 
-        closeButton = new JButton(SignUpConst.CLOSE);
+        closeButton = new JButton(Const.CLOSE);
         closeButton.setBounds(150, 160, 85, 30);
         add(closeButton);
         closeButton.addActionListener(listener);

@@ -2,10 +2,10 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SignUpButtonListener implements ActionListener
+public class SignUpListener implements ActionListener
 {
     private SignUpDialog dialog;
-    public SignUpButtonListener(SignUpDialog dialog)
+    public SignUpListener(SignUpDialog dialog)
     {
         this.dialog = dialog;
     }
@@ -13,7 +13,7 @@ public class SignUpButtonListener implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getActionCommand().equals(SignUpConst.SIGNUP))
+        if (e.getActionCommand().equals(Const.SIGNUP))
         {
             String id = dialog.getId();
             String password = dialog.getPassword();
@@ -24,25 +24,25 @@ public class SignUpButtonListener implements ActionListener
                     message,
                     "회원가입", JOptionPane.PLAIN_MESSAGE);
 
-            if (message.equals(SignUpConst.WRONG_ID) ||
-                    message.equals(SignUpConst.EXIST_SAME_ID))
+            if (message.equals(Const.WRONG_ID) ||
+                    message.equals(Const.EXIST_SAME_ID))
             {
                 dialog.initIdInput();
                 dialog.initPasswordInput();
                 dialog.initAgainPasswordInput();
             }
-            else if (message.equals(SignUpConst.WRONG_PASSWORD))
+            else if (message.equals(Const.WRONG_PASSWORD))
             {
                 dialog.initPasswordInput();
                 dialog.initAgainPasswordInput();
             }
-            else if (message.equals(SignUpConst.DIFFERENT_PASSWORD))
+            else if (message.equals(Const.DIFFERENT_PASSWORD))
             {
                 dialog.initAgainPasswordInput();
             }
         }
 
-        else if (e.getActionCommand().equals(SignUpConst.CLOSE))
+        else if (e.getActionCommand().equals(Const.CLOSE))
         {
             dialog.dispose();
         }

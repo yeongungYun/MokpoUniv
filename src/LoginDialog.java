@@ -14,11 +14,11 @@ public class LoginDialog extends JDialog
     private JButton loginButton;
     private JButton closeButton;
 
-    private LoginButtonListener listener;
+    private LoginListener listener;
 
-    public LoginDialog(MainFrame mf)
+    public LoginDialog(MainFrame mf, String title)
     {
-        super(mf, "로그인");
+        super(mf, title);
 
         setSize(300, 190);
         setLocationRelativeTo(mf.getComponent());
@@ -26,7 +26,7 @@ public class LoginDialog extends JDialog
 
         setModalityType(ModalityType.DOCUMENT_MODAL);
 
-        listener = new LoginButtonListener(mf, this);
+        listener = new LoginListener(mf, this);
 
         idLabel = new JLabel("아이디");
         idLabel.setFont(new Font("맑은고딕", Font.BOLD, 14));
@@ -59,15 +59,15 @@ public class LoginDialog extends JDialog
         add(passwordInputField);
         //
 
-        loginButton = new JButton("로그인");
+        loginButton = new JButton(Const.LOGIN);
         loginButton.setBounds(40, 100, 85, 30);
         add(loginButton);
         loginButton.addActionListener(listener);
 
-        closeButton = new JButton("닫기");
+        closeButton = new JButton(Const.CLOSE);
         closeButton.setBounds(150, 100, 85, 30);
         add(closeButton);
-        closeButton.addActionListener(e -> dispose());
+        closeButton.addActionListener(listener);
 
         setResizable(false);
         setVisible(true);

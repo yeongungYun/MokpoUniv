@@ -2,9 +2,9 @@ import javax.swing.table.DefaultTableModel;
 
 public class FreezeModel extends DefaultTableModel
 {
-    public FreezeModel(String[][] contents, String[] header)
+    public FreezeModel(String[] header, int n)
     {
-        super(contents, header);
+        super(header, n);
     }
 
     @Override

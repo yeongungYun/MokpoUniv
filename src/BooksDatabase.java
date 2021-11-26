@@ -38,15 +38,17 @@ public class BooksDatabase
                 String sql =
                         "CREATE TABLE book ("
                                 + "bid INT PRIMARY KEY AUTO_INCREMENT NOT NULL,"
-                                + "title VARCHAR(20),"
-                                + "author VARCHAR(20),"
+                                + "isbn VARCHAR(15) NOT NULL,"
+                                + "title VARCHAR(20) NOT NULL,"
+                                + "author VARCHAR(15) NOT NULL,"
+                                + "publisher VARCHAR(15) NOT NULL,"
+                                + "publish_date VARCHAR(12) NOT NULL,"
                                 + "isBorrowBy VARCHAR(10),"
                                 + "isReserveBy VARCHAR(10)"
                                 + ");";
                 Statement statement = connection.createStatement();
                 statement.executeUpdate(sql);
             }
-            initModel();
         }
         catch (SQLException e)
         {
@@ -76,29 +78,26 @@ public class BooksDatabase
         return ret;
     }
 
-    public FreezeModel initModel()
+    public FreezeModel initModel(FreezeModel model)
     {
         String sql = "select * from book";
-        String[] header = {"번호", "제목", "저자", "대출", "예약"};
-        int count = countRows();
-        String[][] contents = new String[count][5];
-        FreezeModel model = null;
         try
         {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            for (int i = 0; i < count; ++i)
+            while(resultSet.next())
             {
-                resultSet.next();
                 String bid = String.valueOf(resultSet.getInt("bid"));
+                String isbn = resultSet.getString("isbn");
                 String title = resultSet.getString("title");
                 String author = resultSet.getString("author");
-                String isBorrowBy = (resultSet.getString("isBorrowBy") == null ? "가능" : "불가");
-                String isReserveBy = (resultSet.getString("isReserveBy") == null ? "가능" : "불가");
-                contents[i] = new String[] {bid, title, author, isBorrowBy, isReserveBy};
+                String publisher = resultSet.getString("publisher");
+                String publishDate = resultSet.getString("publish_date");
+                String isBorrowBy = (resultSet.getString("is_borrow_by") == null ? "O" : "X");
+                String isReserveBy = (resultSet.getString("is_reserve_by") == null ? "O" : "X");
+                String[] row = new String[] {bid, isbn, title, author, publisher, publishDate, isBorrowBy, isReserveBy};
+                model.addRow(row);
             }
-            model = new FreezeModel(contents, header);
-
         }
         catch(SQLException e)
         {
@@ -107,63 +106,111 @@ public class BooksDatabase
         return model;
     }
 
-    private int countRows()
+    public FreezeModel SearchData(FreezeModel model, boolean isTitleSelected, String searchText)
     {
-        int count = 0;
-        String sql = "SELECT COUNT(*) FROM book";
+
+        searchText = searchText.toLowerCase(); // 소문자로 변경
+        searchText = searchText.replaceAll("\\s", ""); // 모든 공백 제거
+
+        String sql = "select * from book";
+
+
+        if (isTitleSelected) // 이름으로 검색
+        {
+            try
+            {
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+
+
+                while(resultSet.next())
+                {
+                    String searchTitle = resultSet.getString("title");
+                    searchTitle = searchTitle.toLowerCase(); // 소문자로 변경
+                    searchTitle = searchTitle.replaceAll("\\s", ""); // 모든 공백 제거
+                    if (searchTitle.contains(searchText)) // 포함되어 있으면
+                    {
+                        String bid = String.valueOf(resultSet.getInt("bid"));
+                        String isbn = resultSet.getString("isbn");
+                        String title = resultSet.getString("title");
+                        String author = resultSet.getString("author");
+                        String publisher = resultSet.getString("publisher");
+                        String publishDate = resultSet.getString("publish_date");
+                        String isBorrowBy = (resultSet.getString("is_borrow_by") == null ? "O" : "X");
+                        String isReserveBy = (resultSet.getString("is_reserve_by") == null ? "O" : "X");
+                        String[] row = new String[] {bid, isbn, title, author, publisher, publishDate, isBorrowBy, isReserveBy};
+                        model.addRow(row);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        else // 저자로 검색
+        {
+            try
+            {
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(sql);
+
+                while(resultSet.next())
+                {
+                    String searchAuthor = resultSet.getString("author");
+                    searchAuthor = searchAuthor.toLowerCase(); // 소문자로 변경
+                    searchAuthor = searchAuthor.replaceAll("\\s", ""); // 모든 공백 제거
+                    if (searchAuthor.contains(searchText)) // 포함되어 있으면
+                    {
+                        String bid = String.valueOf(resultSet.getInt("bid"));
+                        String isbn = resultSet.getString("isbn");
+                        String title = resultSet.getString("title");
+                        String author = resultSet.getString("author");
+                        String publisher = resultSet.getString("publisher");
+                        String publishDate = resultSet.getString("publish_date");
+                        String isBorrowBy = (resultSet.getString("is_borrow_by") == null ? "O" : "X");
+                        String isReserveBy = (resultSet.getString("is_reserve_by") == null ? "O" : "X");
+                        String[] row = new String[] {bid, isbn, title, author, publisher, publishDate, isBorrowBy, isReserveBy};
+                        model.addRow(row);
+                    }
+                }
+            }
+            catch (SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return model;
+    }
+
+    public FreezeModel searchMyInfo(FreezeModel model, String id)
+    {
+        String sql = "SELECT * FROM book WHERE isBorrowBy='" + id + "' OR isReserveBy='" + id + "';";
         try
         {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            resultSet.next();
-            count = resultSet.getInt(1);
+
+            while(resultSet.next())
+            {
+                String bid = String.valueOf(resultSet.getInt("bid"));
+                String isbn = resultSet.getString("isbn");
+                String title = resultSet.getString("title");
+                String author = resultSet.getString("author");
+                String publisher = resultSet.getString("publisher");
+                String publishDate = resultSet.getString("publish_date");
+                String isBorrowBy = (resultSet.getString("is_borrow_by") == null ? "O" : "X");
+                String isReserveBy = (resultSet.getString("is_reserve_by") == null ? "O" : "X");
+                String[] row = new String[] {bid, isbn, title, author, publisher, publishDate, isBorrowBy, isReserveBy};
+                model.addRow(row);
+            }
         }
         catch (SQLException e)
         {
             e.printStackTrace();
         }
-        return count;
-    }
-
-    public FreezeModel resetModel()
-    {
-        return initModel();
-    }
-
-    public FreezeModel SearchData(boolean isTitleSelected, String searchText)
-    {
-
-
-        FreezeModel model = initModel();
-        if (searchText.equals(""))
-        {
-            return model;
-        }
-
-        searchText = searchText.toLowerCase(); // 소문자로 변경
-        searchText = searchText.replaceAll("\\s", ""); // 모든 공백 제거
-
-        int searchColumn;
-        if (isTitleSelected)
-        {
-            searchColumn = 1;
-        }
-        else
-        {
-            searchColumn = 2;
-        }
-
-        for (int i = 0; i < model.getRowCount(); ++i)
-        {
-            String textInColumn = (String) model.getValueAt(i, searchColumn);
-            textInColumn = textInColumn.toLowerCase(); // 소문자로 변경
-            textInColumn = textInColumn.replaceAll("\\s", ""); // 모든 공백 제거
-            if (!textInColumn.contains(searchText)) // 포함되어 있는지 확인
-            {
-                model.removeRow(i);
-                --i;
-            }
-        }
         return model;
     }
+
 }

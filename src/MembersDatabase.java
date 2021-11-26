@@ -83,17 +83,17 @@ public class MembersDatabase
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next() && resultSet.getString("password").equals(password))
             {
-                return LoginConst.LOGIN_COMPLETE;
+                return Const.LOGIN_COMPLETE;
             }
             else
             {
-                return LoginConst.LOGIN_FAILED;
+                return Const.LOGIN_FAILED;
             }
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            return LoginConst.LOGIN_ERROR;
+            return Const.LOGIN_ERROR;
         }
     }
 
@@ -101,15 +101,15 @@ public class MembersDatabase
     {
         if (id.length() <= 0 || id.length() > 10)
         {
-            return SignUpConst.WRONG_ID;
+            return Const.WRONG_ID;
         }
         if (password.length() <= 0 || password.length() > 15)
         {
-            return SignUpConst.WRONG_PASSWORD;
+            return Const.WRONG_PASSWORD;
         }
         if (!password.equals(againPassword))
         {
-            return SignUpConst.DIFFERENT_PASSWORD;
+            return Const.DIFFERENT_PASSWORD;
         }
 
         try
@@ -119,20 +119,20 @@ public class MembersDatabase
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) // 이미 존재하는 아이디
             {
-                return SignUpConst.EXIST_SAME_ID;
+                return Const.EXIST_SAME_ID;
             }
             else
             {
                 String signUpSql = "INSERT INTO member values( '"
                         + id + "', '" + password + "');";
                 statement.executeUpdate(signUpSql);
-                return SignUpConst.SIGNUP_COMPLETE;
+                return Const.SIGNUP_COMPLETE;
             }
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            return SignUpConst.SIGNUP_ERROR;
+            return Const.SIGNUP_ERROR;
         }
     }
 }

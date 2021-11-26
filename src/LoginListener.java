@@ -2,11 +2,11 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginButtonListener implements ActionListener
+public class LoginListener implements ActionListener
 {
     private LoginDialog dialog;
     private MainFrame mf;
-    public LoginButtonListener(MainFrame mf, LoginDialog dialog)
+    public LoginListener(MainFrame mf, LoginDialog dialog)
     {
         this.mf = mf;
         this.dialog = dialog;
@@ -15,12 +15,12 @@ public class LoginButtonListener implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getActionCommand().equals(LoginConst.LOGIN))
+        if (e.getActionCommand().equals(Const.LOGIN))
         {
             String id = dialog.getId();
             String password = dialog.getPassword();
             String message = MembersDatabase.getInstance().login(id, password);
-            if (message.equals(LoginConst.LOGIN_COMPLETE))
+            if (message.equals(Const.LOGIN_COMPLETE))
             {
                 mf.changeScreen();
                 dialog.dispose();
@@ -32,13 +32,13 @@ public class LoginButtonListener implements ActionListener
                         "로그인", JOptionPane.PLAIN_MESSAGE);
             }
 
-            if (message.equals(LoginConst.LOGIN_FAILED))
+            if (message.equals(Const.LOGIN_FAILED))
             {
                 dialog.initAll();
             }
         }
 
-        else if (e.getActionCommand().equals(LoginConst.CLOSE))
+        else if (e.getActionCommand().equals(Const.CLOSE))
         {
             dialog.dispose();
         }
