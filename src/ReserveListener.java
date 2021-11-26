@@ -2,11 +2,11 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BorrowListener implements ActionListener
+public class ReserveListener implements ActionListener
 {
-    BorrowDialog dialog;
+    ReserveDialog dialog;
     String id;
-    public BorrowListener(BorrowDialog dialog, String id)
+    public ReserveListener(ReserveDialog dialog, String id)
     {
         this.dialog = dialog;
         this.id = id;
@@ -19,18 +19,18 @@ public class BorrowListener implements ActionListener
 
         if (e.getActionCommand().equals(Const.YES) && bid > -1)
         {
-            String message = BooksDatabase.getInstance().checkCanBorrow(bid);
+            String message = BooksDatabase.getInstance().checkCanReserve(bid);
             if (message.equals(Const.CAN))
             {
-                BooksDatabase.getInstance().borrowBook(bid, id);
+                BooksDatabase.getInstance().reserveBook(bid, id);
                 dialog.getTable().resetTable();
                 JOptionPane.showMessageDialog(null,
-                        Const.BORROW_COMPLETE, Const.BORROW, JOptionPane.PLAIN_MESSAGE);
+                        Const.RESERVE_COMPLETE, Const.RESERVE, JOptionPane.PLAIN_MESSAGE);
             }
             else
             {
                 JOptionPane.showMessageDialog(null,
-                        message, Const.BORROW, JOptionPane.PLAIN_MESSAGE);
+                        message, Const.RESERVE, JOptionPane.PLAIN_MESSAGE);
             }
         }
 

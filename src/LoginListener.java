@@ -22,7 +22,7 @@ public class LoginListener implements ActionListener
             String message = MembersDatabase.getInstance().login(id, password);
             if (message.equals(Const.LOGIN_COMPLETE))
             {
-                mf.changeScreen();
+                mf.changeScreen(id);
                 dialog.dispose();
             }
             else

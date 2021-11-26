@@ -1,3 +1,4 @@
+import javax.xml.stream.events.EntityReference;
 import java.sql.*;
 
 public class BooksDatabase
@@ -186,7 +187,7 @@ public class BooksDatabase
 
     public FreezeModel searchMyInfo(FreezeModel model, String id)
     {
-        String sql = "SELECT * FROM book WHERE isBorrowBy='" + id + "' OR isReserveBy='" + id + "';";
+        String sql = "SELECT * FROM book WHERE is_borrow_by='" + id + "' OR is_reserve_by='" + id + "';";
         try
         {
             Statement statement = connection.createStatement();
@@ -213,4 +214,226 @@ public class BooksDatabase
         return model;
     }
 
+    public String checkCanBorrow(int bid)
+    {
+        String message;
+        String sql = "SELECT * FROM book WHERE bid='" + bid + "';";
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()) // 해당 bid가 존재
+            {
+                if (resultSet.getString("is_borrow_by") == null) // 대출 가능
+                {
+                    message = Const.CAN;
+                }
+                else
+                {
+                    message = Const.ALREADY_BORROWED; // 이미 대출된 책
+                }
+            }
+            else // 존재하지 않는 책 번호
+            {
+                message = Const.NON_EXISTENET_BID;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            message = Const.BORROW_ERROR;
+        }
+        return message;
+    }
+
+    public void borrowBook(int bid, String id)
+    {
+        String sql = "UPDATE book SET is_borrow_by='" + id + "' WHERE bid='" + bid + "';";
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sql);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public String checkCanReturn(int bid, String id)
+    {
+        String message;
+        String sql = "SELECT * FROM book WHERE bid='" + bid + "';";
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()) // 해당 bid가 존재
+            {
+                if (resultSet.getString("is_borrow_by").equals(id)) // 반납 가능
+                {
+                    message = Const.CAN;
+                }
+                else
+                {
+                    message = Const.NOT_BORROWED_TO_ME; // 내가 대출한 책이 아님
+                }
+            }
+            else // 존재하지 않는 책 번호
+            {
+                message = Const.NON_EXISTENET_BID;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            message = Const.RETURN_ERROR;
+        }
+        return message;
+    }
+
+    public void returnBook(int bid)
+    {
+        String sql = "UPDATE book SET is_borrow_by=NULL WHERE bid='" + bid + "';";
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sql);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public String checkCanReserve(int bid)
+    {
+        String message;
+        String sql = "SELECT * FROM book WHERE bid='" + bid + "';";
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()) // 해당 bid가 존재
+            {
+                if (resultSet.getString("is_reserve_by") == null) // 예약 가능
+                {
+                    message = Const.CAN;
+                }
+                else
+                {
+                    message = Const.ALREADY_RESERVED; // 이미 예약된 책
+                }
+            }
+            else // 존재하지 않는 책 번호
+            {
+                message = Const.NON_EXISTENET_BID;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            message = Const.RESERVE_ERROR;
+        }
+        return message;
+    }
+
+    public void reserveBook(int bid, String id)
+    {
+        String sql = "UPDATE book SET is_reserve_by='" + id + "' WHERE bid='" + bid + "';";
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sql);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public String checkCanReserveCancel(int bid, String id)
+    {
+        String message;
+        String sql = "SELECT * FROM book WHERE bid='" + bid + "';";
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()) // 해당 bid가 존재
+            {
+                if (resultSet.getString("is_reserve_by").equals(id)) // 반납 가능
+                {
+                    message = Const.CAN;
+                }
+                else
+                {
+                    message = Const.NOT_RESERVED_TO_ME; // 내가 예약한 책이 아님
+                }
+            }
+            else // 존재하지 않는 책 번호
+            {
+                message = Const.NON_EXISTENET_BID;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            message = Const.RESERVE_CANCEL_ERROR;
+        }
+        return message;
+    }
+
+    public void reserveCancel(int bid)
+    {
+        String sql = "UPDATE book SET is_reserve_by=NULL WHERE bid='" + bid + "';";
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sql);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public String checkCanRemove(int bid)
+    {
+        String message;
+        String sql = "SELECT * FROM book WHERE bid='" + bid + "';";
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()) // 해당 bid가 존재
+            {
+                message = Const.CAN;
+            }
+            else // 존재하지 않는 책 번호
+            {
+                message = Const.NON_EXISTENET_BID;
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            message = Const.REMOVE_ERROR;
+        }
+        return message;
+    }
+
+    public void remove(int bid)
+    {
+        String sql = "DELETE FROM book WHERE bid='" + bid + "';";
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sql);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

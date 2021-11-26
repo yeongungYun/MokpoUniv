@@ -1,20 +1,23 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class InputBookNumberDialog extends JDialog
+public class InputBidDialog extends JDialog
 {
+    MainFrame mf;
+
     JLabel label;
     JTextField field;
-
     JButton yesButton;
     JButton noButton;
-    public InputBookNumberDialog(MainFrame mf, String title)
+    public InputBidDialog(MainFrame mf, String title) // 자식 클래스마다 리스너 만들고 setResizable, setVisible만 하면 됨
     {
         super(mf, title);
+        this.mf = mf;
         setSize(280, 150);
         setLocationRelativeTo(mf.getComponent());
         setLayout(null);
         setModalityType(ModalityType.DOCUMENT_MODAL);
+
 
         label = new JLabel("책 번호 입력");
         label.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
@@ -33,7 +36,28 @@ public class InputBookNumberDialog extends JDialog
         noButton.setBounds(142, 60, 70, 30);
         this.add(noButton);
 
-        setResizable(false);
-        setVisible(true);
+    }
+
+    public int getBid()
+    {
+        String text = field.getText();
+        if (text.equals(""))
+        {
+            return -1;
+        }
+        else
+        {
+            return Integer.parseInt(text);
+        }
+    }
+
+    public BookTable getTable()
+    {
+        return mf.getMainScreen().getTablePanel();
+    }
+
+    public String getId()
+    {
+        return mf.getMainScreen().getId();
     }
 }

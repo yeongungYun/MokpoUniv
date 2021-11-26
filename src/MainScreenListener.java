@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,7 +16,7 @@ public class MainScreenListener implements ActionListener
     {
         if (e.getActionCommand().equals(Const.SEARCH))
         {
-            BookListPanel table = screen.getTablePanel();
+            BookTable table = screen.getTablePanel();
             String searchText = screen.getText();
             boolean isTitleSelected = screen.isTitleSelected();
             if (!searchText.equals(""))
@@ -28,14 +27,12 @@ public class MainScreenListener implements ActionListener
 
         else if (e.getActionCommand().equals(Const.RESET))
         {
-            BookListPanel table = screen.getTablePanel();
-            table.resetTable();
+            screen.getTablePanel().resetTable();
         }
         else if (e.getActionCommand().equals(Const.MY_INFORMATION))
         {
             String id = screen.getId();
-            BookListPanel table = screen.getTablePanel();
-            table.searchMyInfo(id);
+            screen.getTablePanel().searchMyInfo(id);
         }
         else if (e.getActionCommand().equals(Const.BORROW))
         {
@@ -50,6 +47,21 @@ public class MainScreenListener implements ActionListener
         else if (e.getActionCommand().equals(Const.RESERVE))
         {
             new ReserveDialog(mf, Const.RESERVE);
+        }
+
+        else if (e.getActionCommand().equals(Const.RESERVE_CANCEL))
+        {
+            new ReserveCancelDialog(mf, Const.RESERVE_CANCEL);
+        }
+
+        else if (e.getActionCommand().equals(Const.ADD))
+        {
+            new AddDialog(mf, Const.ADD);
+        }
+
+        else if (e.getActionCommand().equals(Const.REMOVE))
+        {
+            new RemoveDialog(mf, Const.REMOVE);
         }
 
         else if (e.getActionCommand().equals(Const.LOGOUT))

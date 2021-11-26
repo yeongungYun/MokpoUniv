@@ -1,13 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class BookListPanel extends JPanel
+public class BookTable extends JPanel
 {
     private JTable table;
     private JScrollPane bookListScroll;
     private String[] header;
 
-    public BookListPanel()
+    public BookTable()
     {
         header = new String[] {"번호", "isbn", "제목", "저자", "출판사", "출판일", "대출", "예약"};
         table = new JTable(BooksDatabase.getInstance().initModel(

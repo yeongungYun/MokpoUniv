@@ -33,8 +33,18 @@ public class MainFrame extends JFrame
         return c;
     }
 
-    public void changeScreen() // 로그인 성공 / 로그이웃 시 스크린 교체
+    public void changeScreen(String id) // 로그인 성공 / 로그이웃 시 스크린 교체
     {
         cards.next(container);
+        mainScreen.setId(id);
+    }
+    public void changeScreen()
+    {
+        cards.next(container);
+    }
+
+    public MainScreen getMainScreen()
+    {
+        return mainScreen;
     }
 }
