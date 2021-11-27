@@ -15,7 +15,7 @@ public class BookTable extends JPanel
         table.getTableHeader().setReorderingAllowed(false); // 셀 이동 불가
         table.getTableHeader().setResizingAllowed(false); // 셀 크기 조절 불가
         bookListScroll = new JScrollPane(table);
-        bookListScroll.setPreferredSize(new Dimension(560, 680));
+        bookListScroll.setPreferredSize(new Dimension(560, 690));
         setTableWidth();
         add(bookListScroll);
     }

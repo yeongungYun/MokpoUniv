@@ -19,7 +19,6 @@ public class ImagePanel extends JPanel
             e.printStackTrace();
         }
     }
-
     public void paint(Graphics g)
     {
         g.drawImage(image, 0, 0, null);

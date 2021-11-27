@@ -53,7 +53,7 @@ public class InputBidDialog extends JDialog
 
     public BookTable getTable()
     {
-        return mf.getMainScreen().getTablePanel();
+        return mf.getMainScreen().getTable();
     }
 
     public String getId()

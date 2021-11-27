@@ -132,7 +132,7 @@ public class MainScreen extends JPanel
 
     public void setId(String id) { this.id = id; }
     public String getId() { return id; }
-    public BookTable getTablePanel()
+    public BookTable getTable()
     {
         return bookTable;
     }

@@ -23,8 +23,8 @@ public class Const
     public static final String RETURN = "반납";
     public static final String RESERVE = "예약";
     public static final String RESERVE_CANCEL = "예약 취소";
-    public static final String ADD = "도서 추가";
-    public static final String REMOVE = "도서 삭제";
+    public static final String ADD = "추가";
+    public static final String REMOVE = "삭제";
     public static final String LOGOUT = "로그아웃";
 
     // 대출
@@ -47,10 +47,13 @@ public class Const
     public static final String NOT_RESERVED_TO_ME = "내가 예약한 책이 아닙니다.";
     public static final String RESERVE_CANCEL_ERROR = "예약 취소 오류";
 
+    //도서 추가
+    public static final String FILL_IN_FORM = "비어있는 항목이 있습니다.";
+    public static final String ADD_COMPLETE = "도서가 추가되었습니다.";
+
     // 도서 삭제
     public static final String REMOVE_COMPLETE = "도서 삭제가 완료되었습니다.";
     public static final String REMOVE_ERROR = "도서 삭제 오류";
-
 
     // 공용
     public static final String YES = "확인";
@@ -58,5 +61,4 @@ public class Const
     public static final String CLOSE = "닫기";
     public static final String CAN = "가능";
     public static final String NON_EXISTENET_BID = "존재하지 않는 책번호입니다.";
-
 }

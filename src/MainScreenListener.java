@@ -16,7 +16,7 @@ public class MainScreenListener implements ActionListener
     {
         if (e.getActionCommand().equals(Const.SEARCH))
         {
-            BookTable table = screen.getTablePanel();
+            BookTable table = screen.getTable();
             String searchText = screen.getText();
             boolean isTitleSelected = screen.isTitleSelected();
             if (!searchText.equals(""))
@@ -27,12 +27,12 @@ public class MainScreenListener implements ActionListener
 
         else if (e.getActionCommand().equals(Const.RESET))
         {
-            screen.getTablePanel().resetTable();
+            screen.getTable().resetTable();
         }
         else if (e.getActionCommand().equals(Const.MY_INFORMATION))
         {
             String id = screen.getId();
-            screen.getTablePanel().searchMyInfo(id);
+            screen.getTable().searchMyInfo(id);
         }
         else if (e.getActionCommand().equals(Const.BORROW))
         {

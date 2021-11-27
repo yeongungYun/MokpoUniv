@@ -1,3 +1,4 @@
+import javax.swing.plaf.nimbus.State;
 import javax.xml.stream.events.EntityReference;
 import java.sql.*;
 
@@ -421,6 +422,21 @@ public class BooksDatabase
             message = Const.REMOVE_ERROR;
         }
         return message;
+    }
+
+    public void add(String isbn, String title, String author, String publisher, String publishDate)
+    {
+        String sql = "INSERT INTO book (isbn, title, author, publisher, publish_date) VALUES"
+                + "( '" + isbn + "', '" + title + "', '" + author + "', '" + publisher + "', '" + publishDate + "');";
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sql);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void remove(int bid)
