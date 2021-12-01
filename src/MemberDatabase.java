@@ -1,23 +1,23 @@
 import java.sql.*;
 
-public class MembersDatabase
+public class MemberDatabase
 {
-    private volatile static MembersDatabase instance = null;
+    private volatile static MemberDatabase instance = null;
     private Connection connection;
 
 
-    private MembersDatabase()
+    private MemberDatabase()
     {
         initDataBase();
     }
 
-    public static MembersDatabase getInstance()
+    public static MemberDatabase getInstance()
     {
         if (instance == null)
         {
-            synchronized (MembersDatabase.class)
+            synchronized (MemberDatabase.class)
             {
-                instance = new MembersDatabase();
+                instance = new MemberDatabase();
             }
         }
         return instance;
@@ -99,19 +99,6 @@ public class MembersDatabase
 
     public String signUp(String id, String password, String againPassword)
     {
-        if (id.length() <= 0 || id.length() > 10)
-        {
-            return Const.WRONG_ID;
-        }
-        if (password.length() <= 0 || password.length() > 15)
-        {
-            return Const.WRONG_PASSWORD;
-        }
-        if (!password.equals(againPassword))
-        {
-            return Const.DIFFERENT_PASSWORD;
-        }
-
         try
         {
             Statement statement = connection.createStatement();

@@ -1,14 +1,25 @@
+import javax.swing.*;
+import java.awt.*;
+
 public class ReserveCancelDialog extends InputBidDialog
 {
-    ReserveCancelListener listener;
+    JButton reverseCancelButton;
+
+    DialogListener listener;
     public ReserveCancelDialog(MainFrame mf, String title)
     {
         super(mf, title);
 
-        listener = new ReserveCancelListener(this, mf.getMainScreen().getId());
+        listener = new DialogListener(this);
 
-        yesButton.addActionListener(listener);
-        noButton.addActionListener(listener);
+        reverseCancelButton = new JButton(Const.RESERVE_CANCEL);
+        reverseCancelButton.setBounds(32, 60, 90, 30);
+        reverseCancelButton.setFont(new Font("맑은고딕", Font.BOLD, 10));
+        reverseCancelButton.addActionListener(listener);
+        this.add(reverseCancelButton);
+
+        reverseCancelButton.addActionListener(listener);
+        closeButton.addActionListener(listener);
 
         setResizable(false);
         setVisible(true);

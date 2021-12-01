@@ -11,62 +11,57 @@ public class MainScreenListener implements ActionListener
         this.mf = mf;
         this.screen = screen;
     }
+
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getActionCommand().equals(Const.SEARCH))
+        switch (e.getActionCommand())
         {
-            BookTable table = screen.getTable();
-            String searchText = screen.getText();
-            boolean isTitleSelected = screen.isTitleSelected();
-            if (!searchText.equals(""))
-            {
-                table.searchTable(isTitleSelected, searchText);
-            }
-        }
+            case Const.SEARCH:
+                BookTable table = screen.getTable();
+                String searchText = screen.getText();
+                if (!searchText.equals(""))
+                {
+                    table.searchTable(screen.getSelectedCategory(), searchText);
+                }
+                break;
 
-        else if (e.getActionCommand().equals(Const.RESET))
-        {
-            screen.getTable().resetTable();
-        }
-        else if (e.getActionCommand().equals(Const.MY_INFORMATION))
-        {
-            String id = screen.getId();
-            screen.getTable().searchMyInfo(id);
-        }
-        else if (e.getActionCommand().equals(Const.BORROW))
-        {
-            new BorrowDialog(mf, Const.BORROW);
-        }
+            case Const.RESET:
+                screen.getTable().resetTable();
+                break;
 
-        else if (e.getActionCommand().equals(Const.RETURN))
-        {
-            new ReturnDialog(mf, Const.RETURN);
-        }
+            case Const.MY_INFORMATION:
+                String id = screen.getId();
+                screen.getTable().searchMyInfo(id);
+                break;
 
-        else if (e.getActionCommand().equals(Const.RESERVE))
-        {
-            new ReserveDialog(mf, Const.RESERVE);
-        }
+            case Const.BORROW:
+                new BorrowDialog(mf, Const.BORROW);
+                break;
 
-        else if (e.getActionCommand().equals(Const.RESERVE_CANCEL))
-        {
-            new ReserveCancelDialog(mf, Const.RESERVE_CANCEL);
-        }
+            case Const.RETURN:
+                new ReturnDialog(mf, Const.RETURN);
+                break;
 
-        else if (e.getActionCommand().equals(Const.ADD))
-        {
-            new AddDialog(mf, Const.ADD);
-        }
+            case Const.RESERVE:
+                new ReserveDialog(mf, Const.RESERVE);
+                break;
 
-        else if (e.getActionCommand().equals(Const.REMOVE))
-        {
-            new RemoveDialog(mf, Const.REMOVE);
-        }
+            case Const.RESERVE_CANCEL:
+                new ReserveCancelDialog(mf, Const.RESERVE_CANCEL);
+                break;
 
-        else if (e.getActionCommand().equals(Const.LOGOUT))
-        {
-            new LogoutDialog(mf, Const.LOGOUT);
+            case Const.ADD:
+                new AddDialog(mf, Const.ADD);
+                break;
+
+            case Const.REMOVE:
+                new RemoveDialog(mf, Const.REMOVE);
+                break;
+
+            case Const.LOGOUT:
+                new LogoutDialog(mf, Const.LOGOUT);
+                break;
         }
     }
 }

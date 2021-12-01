@@ -11,11 +11,14 @@ public class Const
 
     // 로그인
     public static final String LOGIN = "로그인";
-    public static final String LOGIN_FAILED = "로그인 실패";
+    public static final String LOGIN_FAILED = "아이디 또는 비밀번호가 잘못되었습니다.";
     public static final String LOGIN_COMPLETE = "로그인 완료";
     public static final String LOGIN_ERROR = "로그인 중 오류 발생";
 
     // 메인 스크린
+    public static final String TITLE = "제목";
+    public static final String AUTHOR = "저자";
+    public static final String PUBLISHER = "출판사";
     public static final String SEARCH = "검색";
     public static final String RESET = "초기화";
     public static final String MY_INFORMATION = "내 정보";
@@ -48,7 +51,7 @@ public class Const
     public static final String RESERVE_CANCEL_ERROR = "예약 취소 오류";
 
     //도서 추가
-    public static final String FILL_IN_FORM = "비어있는 항목이 있습니다.";
+    public static final String FILL_OUT_FORM = "모든 항목을 작성해주세요.";
     public static final String ADD_COMPLETE = "도서가 추가되었습니다.";
 
     // 도서 삭제
@@ -59,6 +62,7 @@ public class Const
     public static final String YES = "확인";
     public static final String NO = "취소";
     public static final String CLOSE = "닫기";
+    public static final String EXIT = "종료";
     public static final String CAN = "가능";
     public static final String NON_EXISTENET_BID = "존재하지 않는 책번호입니다.";
 }

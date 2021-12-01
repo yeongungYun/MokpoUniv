@@ -1,14 +1,21 @@
+import javax.swing.*;
+
 public class RemoveDialog extends InputBidDialog
 {
-    RemoveListener listener;
+    JButton removeButton;
+    DialogListener listener;
     public RemoveDialog(MainFrame mf, String title)
     {
         super(mf, title);
 
-        listener = new RemoveListener(this, mf.getMainScreen().getId());
+        listener = new DialogListener(this);
 
-        yesButton.addActionListener(listener);
-        noButton.addActionListener(listener);
+        removeButton = new JButton(Const.REMOVE);
+        removeButton.setBounds(32, 60, 70, 30);
+        removeButton.addActionListener(listener);
+        this.add(removeButton);
+
+        closeButton.addActionListener(listener);
 
         setResizable(false);
         setVisible(true);

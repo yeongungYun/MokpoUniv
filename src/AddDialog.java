@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class AddDialog extends JDialog
+public class AddDialog extends Dialog
 {
     JLabel isbnLabel;
     JTextField isbnField;
@@ -16,74 +16,102 @@ public class AddDialog extends JDialog
     JTextField publisherField;
 
     JLabel publishDateLabel;
+    JTextField publishYearField;
+    JTextField publishMonthField;
     JTextField publishDateField;
+
+    JLabel registerDateLabel;
+    JTextField registerYearField;
+    JTextField registerMonthField;
+    JTextField registerDateField;
 
     JButton addButton;
     JButton closeButton;
 
-    AddListener listener;
+    DialogListener listener;
 
     BookTable table;
 
     public AddDialog(MainFrame mf, String title)
     {
         super(mf, title);
-        setSize(300, 280);
+        setSize(300, 320);
         setLocationRelativeTo(mf.getComponent());
         setLayout(null);
         setModalityType(ModalityType.DOCUMENT_MODAL);
 
-        listener = new AddListener(this);
+        listener = new DialogListener(this);
 
         Font font = new Font("맑은고딕", Font.PLAIN, 14);
 
         isbnLabel = new JLabel("isbn");
         isbnLabel.setFont(font);
-        isbnLabel.setBounds(70, 10, 60, 30);
+        isbnLabel.setBounds(47, 10, 60, 30);
         add(isbnLabel);
         isbnField = new JTextField(15);
-        isbnField.setBounds(120, 10, 100, 30);
+        isbnField.setBounds(100, 10, 130, 30);
         add(isbnField);
 
         titleLabel = new JLabel("제목");
         titleLabel.setFont(font);
-        titleLabel.setBounds(70, 45, 60, 30);
+        titleLabel.setBounds(47, 45, 60, 30);
         add(titleLabel);
         titleField = new JTextField(15);
-        titleField.setBounds(120, 45, 100, 30);
+        titleField.setBounds(100, 45, 130, 30);
         add(titleField);
 
         authorLabel = new JLabel("저자");
         authorLabel.setFont(font);
-        authorLabel.setBounds(70, 80, 60, 30);
+        authorLabel.setBounds(47, 80, 60, 30);
         add(authorLabel);
         authorField = new JTextField(15);
-        authorField.setBounds(120, 80, 100, 30);
+        authorField.setBounds(100, 80, 130, 30);
         add(authorField);
 
         publisherLabel = new JLabel("출판사");
         publisherLabel.setFont(font);
-        publisherLabel.setBounds(60, 115, 60 ,30);
+        publisherLabel.setBounds(40, 115, 60 ,30);
         add(publisherLabel);
         publisherField = new JTextField(15);
-        publisherField.setBounds(120, 115, 100, 30);
+        publisherField.setBounds(100, 115, 130, 30);
         add(publisherField);
 
         publishDateLabel = new JLabel("출판일");
         publishDateLabel.setFont(font);
-        publishDateLabel.setBounds(60, 150, 60, 30);
+        publishDateLabel.setBounds(40, 150, 60, 30);
         add(publishDateLabel);
-        publishDateField = new JTextField(15);
-        publishDateField.setBounds(120, 150,100, 30);
+        publishYearField = new JTextField(6);
+        publishYearField.setBounds(100, 150,60, 30);
+        add(publishYearField);
+        publishMonthField = new JTextField(3);
+        publishMonthField.setBounds(165, 150, 30, 30);
+        add(publishMonthField);
+        publishDateField = new JTextField(3);
+        publishDateField.setBounds(200, 150, 30, 30);
         add(publishDateField);
 
+
+        registerDateLabel = new JLabel("등록일");
+        registerDateLabel.setFont(font);
+        registerDateLabel.setBounds(40, 185, 60 ,30);
+        add(registerDateLabel);
+        registerYearField = new JTextField(6);
+        registerYearField.setBounds(100, 185,60, 30);
+        add(registerYearField);
+        registerMonthField = new JTextField(3);
+        registerMonthField.setBounds(165, 185, 30, 30);
+        add(registerMonthField);
+        registerDateField = new JTextField(3);
+        registerDateField.setBounds(200, 185, 30, 30);
+        add(registerDateField);
+
         addButton = new JButton(Const.ADD);
-        addButton.setBounds(55, 190, 70, 30);
+        addButton.setBounds(68, 230, 70, 30);
         addButton.addActionListener(listener);
         add(addButton);
 
         closeButton = new JButton(Const.CLOSE);
-        closeButton.setBounds(150, 190, 70, 30);
+        closeButton.setBounds(154, 230, 70, 30);
         closeButton.addActionListener(listener);
         add(closeButton);
 
@@ -115,11 +143,30 @@ public class AddDialog extends JDialog
 
     public String getPublishDate()
     {
-        return publishDateField.getText();
+        return publishYearField.getText() + "." + publishMonthField + "." + publishDateField;
+    }
+
+    public String getRegisterDate()
+    {
+        return registerYearField.getText() + "." + registerMonthField + "." + registerDateField;
     }
 
     public BookTable getTable()
     {
         return table;
+    }
+
+    public boolean fillOutAllForm()
+    {
+        boolean ret = true;
+        if (isbnField.getText().equals("") || titleField.getText().equals("")
+        || authorField.getText().equals("") || publisherField.getText().equals("")
+        || publishYearField.getText().equals("") || publishMonthField.getText().equals("")
+        || publishDateField.getText().equals("") || registerYearField.getText().equals("")
+        || registerMonthField.getText().equals("") || registerDateField.getText().equals(""))
+        {
+            ret = false;
+        }
+        return ret;
     }
 }

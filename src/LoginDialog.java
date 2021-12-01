@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginDialog extends JDialog
+public class LoginDialog extends Dialog
 {
     private JLabel idLabel;
     private JLabel idRule;
@@ -14,7 +14,7 @@ public class LoginDialog extends JDialog
     private JButton loginButton;
     private JButton closeButton;
 
-    private LoginListener listener;
+    private DialogListener listener;
 
     public LoginDialog(MainFrame mf, String title)
     {
@@ -26,7 +26,7 @@ public class LoginDialog extends JDialog
 
         setModalityType(ModalityType.DOCUMENT_MODAL);
 
-        listener = new LoginListener(mf, this);
+        listener = new DialogListener(this);
 
         idLabel = new JLabel("아이디");
         idLabel.setFont(new Font("맑은고딕", Font.BOLD, 14));
@@ -80,11 +80,5 @@ public class LoginDialog extends JDialog
     public String getPassword()
     {
         return new String(passwordInputField.getPassword());
-    }
-
-    public void initAll()
-    {
-        idInputField.setText("");
-        passwordInputField.setText("");
     }
 }

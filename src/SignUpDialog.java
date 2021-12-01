@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class SignUpDialog extends JDialog
+public class SignUpDialog extends Dialog
 {
     private JLabel idLabel;
     private JLabel idRule;
@@ -17,7 +17,7 @@ public class SignUpDialog extends JDialog
     private JButton signUpButton;
     private JButton closeButton;
 
-    private SignUpListener listener;
+    private DialogListener listener;
 
     public SignUpDialog(MainFrame mf, String title)
     {
@@ -29,7 +29,7 @@ public class SignUpDialog extends JDialog
 
         setModalityType(ModalityType.DOCUMENT_MODAL);
 
-        listener = new SignUpListener(this);
+        listener = new DialogListener(this);
 
         idLabel = new JLabel("아이디");
         idLabel.setFont(new Font("맑은고딕", Font.BOLD, 13));
@@ -102,15 +102,15 @@ public class SignUpDialog extends JDialog
         return new String(againPasswordInputField.getPassword());
     }
 
-    public void initIdInput()
+    public void initIdField()
     {
         idInputField.setText("");
     }
-    public void initPasswordInput()
+    public void initPasswordField()
     {
         passwordInputField.setText("");
     }
-    public void initAgainPasswordInput()
+    public void initAgainPasswordField()
     {
         againPasswordInputField.setText("");
     }

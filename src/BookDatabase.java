@@ -1,24 +1,22 @@
-import javax.swing.plaf.nimbus.State;
-import javax.xml.stream.events.EntityReference;
 import java.sql.*;
 
-public class BooksDatabase
+public class BookDatabase
 {
-    private volatile static BooksDatabase instance = null;
+    private volatile static BookDatabase instance = null;
     private Connection connection;
 
-    private BooksDatabase()
+    private BookDatabase()
     {
         initDataBase();
     }
 
-    public static BooksDatabase getInstance()
+    public static BookDatabase getInstance()
     {
         if (instance == null)
         {
-            synchronized (BooksDatabase.class)
+            synchronized (BookDatabase.class)
             {
-                instance = new BooksDatabase();
+                instance = new BookDatabase();
             }
         }
         return instance;
@@ -45,6 +43,7 @@ public class BooksDatabase
                                 + "author VARCHAR(15) NOT NULL,"
                                 + "publisher VARCHAR(15) NOT NULL,"
                                 + "publish_date VARCHAR(12) NOT NULL,"
+                                + "register_date VARCHAR(12) NOT NULL,"
                                 + "is_borrow_by VARCHAR(10),"
                                 + "is_reserve_by VARCHAR(10)"
                                 + ");";
@@ -65,7 +64,7 @@ public class BooksDatabase
         try
         {
             Statement statement = connection.createStatement();
-            String sql = "SHOW TABLES LIKE 'book'";
+            String sql = "SHOW TABLES LIKE 'book';";
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next())
             {
@@ -82,7 +81,7 @@ public class BooksDatabase
 
     public FreezeModel initModel(FreezeModel model)
     {
-        String sql = "select * from book";
+        String sql = "SELECT * FROM book;";
         try
         {
             Statement statement = connection.createStatement();
@@ -95,9 +94,11 @@ public class BooksDatabase
                 String author = resultSet.getString("author");
                 String publisher = resultSet.getString("publisher");
                 String publishDate = resultSet.getString("publish_date");
+                String registerDate = resultSet.getString("register_date");
                 String isBorrowBy = (resultSet.getString("is_borrow_by") == null ? "O" : "X");
                 String isReserveBy = (resultSet.getString("is_reserve_by") == null ? "O" : "X");
-                String[] row = new String[] {bid, isbn, title, author, publisher, publishDate, isBorrowBy, isReserveBy};
+                String[] row = new String[] {bid, isbn, title, author, publisher, publishDate,
+                        registerDate, isBorrowBy, isReserveBy};
                 model.addRow(row);
             }
         }
@@ -108,85 +109,61 @@ public class BooksDatabase
         return model;
     }
 
-    public FreezeModel SearchData(FreezeModel model, boolean isTitleSelected, String searchText)
+    public FreezeModel SearchData(FreezeModel model, String searchCategory, String searchText)
     {
+        // 모든 공백 제거 후 소문자로 변경
+        String text = searchText.toLowerCase().replaceAll("\\s", "");
 
-        searchText = searchText.toLowerCase(); // 소문자로 변경
-        searchText = searchText.replaceAll("\\s", ""); // 모든 공백 제거
+        String sql = "SELECT * FROM book;";
 
-        String sql = "select * from book";
-
-        // 메소드로 통합
-        if (isTitleSelected) // 이름으로 검색
+        String searchField = "";
+        if (searchCategory.equals(Const.TITLE))
         {
-            try
+            searchField = "title";
+        }
+        else if (searchCategory.equals(Const.AUTHOR))
+        {
+            searchField = "author";
+        }
+        else if (searchCategory.equals(Const.PUBLISHER))
+        {
+            searchField = "publisher";
+        }
+
+        try
+        {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while(resultSet.next())
             {
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(sql);
-
-
-                while(resultSet.next())
+                String searchedRecord = resultSet.getString(searchField);
+                // 모든 공백 제거 후 소문자로 변경
+                searchedRecord = searchedRecord.toLowerCase().replaceAll("\\s", "");
+                if (searchedRecord.contains(text)) // 포함되어 있으면
                 {
-                    String searchTitle = resultSet.getString("title");
-                    searchTitle = searchTitle.toLowerCase(); // 소문자로 변경
-                    searchTitle = searchTitle.replaceAll("\\s", ""); // 모든 공백 제거
-                    if (searchTitle.contains(searchText)) // 포함되어 있으면
-                    {
-                        String bid = String.valueOf(resultSet.getInt("bid"));
-                        String isbn = resultSet.getString("isbn");
-                        String title = resultSet.getString("title");
-                        String author = resultSet.getString("author");
-                        String publisher = resultSet.getString("publisher");
-                        String publishDate = resultSet.getString("publish_date");
-                        String isBorrowBy = (resultSet.getString("is_borrow_by") == null ? "O" : "X");
-                        String isReserveBy = (resultSet.getString("is_reserve_by") == null ? "O" : "X");
-                        String[] row = new String[] {bid, isbn, title, author, publisher, publishDate, isBorrowBy, isReserveBy};
-                        model.addRow(row);
-                    }
+                    String bid = String.valueOf(resultSet.getInt("bid"));
+                    String isbn = resultSet.getString("isbn");
+                    String title = resultSet.getString("title");
+                    String author = resultSet.getString("author");
+                    String publisher = resultSet.getString("publisher");
+                    String publishDate = resultSet.getString("publish_date");
+                    String registerDate = resultSet.getString("register_date");
+                    String isBorrowBy = (resultSet.getString("is_borrow_by") == null ? "O" : "X");
+                    String isReserveBy = (resultSet.getString("is_reserve_by") == null ? "O" : "X");
+                    String[] row = new String[] {bid, isbn, title, author, publisher, publishDate,
+                            registerDate, isBorrowBy, isReserveBy};
+                    model.addRow(row);
                 }
             }
+        }
             catch (Exception e)
             {
                 e.printStackTrace();
             }
-        }
-
-        else // 저자로 검색
-        {
-            try
-            {
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(sql);
-
-                while(resultSet.next())
-                {
-                    String searchAuthor = resultSet.getString("author");
-                    searchAuthor = searchAuthor.toLowerCase(); // 소문자로 변경
-                    searchAuthor = searchAuthor.replaceAll("\\s", ""); // 모든 공백 제거
-                    if (searchAuthor.contains(searchText)) // 포함되어 있으면
-                    {
-                        String bid = String.valueOf(resultSet.getInt("bid"));
-                        String isbn = resultSet.getString("isbn");
-                        String title = resultSet.getString("title");
-                        String author = resultSet.getString("author");
-                        String publisher = resultSet.getString("publisher");
-                        String publishDate = resultSet.getString("publish_date");
-                        String isBorrowBy = (resultSet.getString("is_borrow_by") == null ? "O" : "X");
-                        String isReserveBy = (resultSet.getString("is_reserve_by") == null ? "O" : "X");
-                        String[] row = new String[] {bid, isbn, title, author, publisher, publishDate, isBorrowBy, isReserveBy};
-                        model.addRow(row);
-                    }
-                }
-            }
-            catch (SQLException e)
-            {
-                e.printStackTrace();
-            }
-        }
         return model;
     }
 
-    public FreezeModel searchMyInfo(FreezeModel model, String id)
+    public FreezeModel myInformation(FreezeModel model, String id)
     {
         String sql = "SELECT * FROM book WHERE is_borrow_by='" + id + "' OR is_reserve_by='" + id + "';";
         try
@@ -202,9 +179,11 @@ public class BooksDatabase
                 String author = resultSet.getString("author");
                 String publisher = resultSet.getString("publisher");
                 String publishDate = resultSet.getString("publish_date");
+                String registerDate = resultSet.getString("register_date");
                 String isBorrowBy = (resultSet.getString("is_borrow_by") == null ? "O" : "X");
                 String isReserveBy = (resultSet.getString("is_reserve_by") == null ? "O" : "X");
-                String[] row = new String[] {bid, isbn, title, author, publisher, publishDate, isBorrowBy, isReserveBy};
+                String[] row = new String[] {bid, isbn, title, author, publisher, publishDate,
+                        registerDate, isBorrowBy, isReserveBy};
                 model.addRow(row);
             }
         }
@@ -215,7 +194,7 @@ public class BooksDatabase
         return model;
     }
 
-    public String checkCanBorrow(int bid)
+    public String borrowCheckMessage(int bid)
     {
         String message;
         String sql = "SELECT * FROM book WHERE bid='" + bid + "';";
@@ -247,7 +226,7 @@ public class BooksDatabase
         return message;
     }
 
-    public void borrowBook(int bid, String id)
+    public void borrow(int bid, String id)
     {
         String sql = "UPDATE book SET is_borrow_by='" + id + "' WHERE bid='" + bid + "';";
         try
@@ -261,7 +240,7 @@ public class BooksDatabase
         }
     }
 
-    public String checkCanReturn(int bid, String id)
+    public String returnCheckMessage(int bid, String id)
     {
         String message;
         String sql = "SELECT * FROM book WHERE bid='" + bid + "';";
@@ -269,15 +248,22 @@ public class BooksDatabase
         {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            if (resultSet.next()) // 해당 bid가 존재
+            if (resultSet.next()) // 존재하는 bid
             {
-                if (resultSet.getString("is_borrow_by").equals(id)) // 반납 가능
+                if (resultSet.getString("is_borrow_by") == null)
                 {
-                    message = Const.CAN;
+                    message = Const.NOT_BORROWED_TO_ME;
                 }
                 else
                 {
-                    message = Const.NOT_BORROWED_TO_ME; // 내가 대출한 책이 아님
+                    if (resultSet.getString("is_borrow_by").equals(id))
+                    {
+                        message = Const.CAN;
+                    }
+                    else
+                    {
+                        message = Const.NOT_BORROWED_TO_ME;
+                    }
                 }
             }
             else // 존재하지 않는 책 번호
@@ -307,7 +293,7 @@ public class BooksDatabase
         }
     }
 
-    public String checkCanReserve(int bid)
+    public String reserveCheckMessage(int bid)
     {
         String message;
         String sql = "SELECT * FROM book WHERE bid='" + bid + "';";
@@ -315,7 +301,7 @@ public class BooksDatabase
         {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
-            if (resultSet.next()) // 해당 bid가 존재
+            if (resultSet.next()) // 존재하는 bid
             {
                 if (resultSet.getString("is_reserve_by") == null) // 예약 가능
                 {
@@ -339,7 +325,7 @@ public class BooksDatabase
         return message;
     }
 
-    public void reserveBook(int bid, String id)
+    public void reserve(int bid, String id)
     {
         String sql = "UPDATE book SET is_reserve_by='" + id + "' WHERE bid='" + bid + "';";
         try
@@ -353,7 +339,7 @@ public class BooksDatabase
         }
     }
 
-    public String checkCanReserveCancel(int bid, String id)
+    public String reserveCancelCheckMessage(int bid, String id)
     {
         String message;
         String sql = "SELECT * FROM book WHERE bid='" + bid + "';";
@@ -399,7 +385,24 @@ public class BooksDatabase
         }
     }
 
-    public String checkCanRemove(int bid)
+    public void add(String isbn, String title, String author, String publisher,
+                    String publishDate, String registerDate)
+    {
+        String sql = "INSERT INTO book (isbn, title, author, publisher, publish_date, register_date) VALUES"
+                + "( '" + isbn + "', '" + title + "', '" + author + "', '"
+                + publisher + "', '" + publishDate + "', '" + registerDate + "');";
+        try
+        {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sql);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public String removeCheckMessage(int bid)
     {
         String message;
         String sql = "SELECT * FROM book WHERE bid='" + bid + "';";
@@ -422,21 +425,6 @@ public class BooksDatabase
             message = Const.REMOVE_ERROR;
         }
         return message;
-    }
-
-    public void add(String isbn, String title, String author, String publisher, String publishDate)
-    {
-        String sql = "INSERT INTO book (isbn, title, author, publisher, publish_date) VALUES"
-                + "( '" + isbn + "', '" + title + "', '" + author + "', '" + publisher + "', '" + publishDate + "');";
-        try
-        {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(sql);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
     }
 
     public void remove(int bid)

@@ -1,12 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class LogoutDialog extends JDialog
+public class LogoutDialog extends Dialog
 {
     private JLabel checkMessage;
     private JButton logoutButton;
     private JButton closeButton;
-    private LogoutListener listener;
+    private DialogListener listener;
 
     public LogoutDialog(MainFrame mf, String title)
     {
@@ -16,20 +16,20 @@ public class LogoutDialog extends JDialog
         setLayout(null);
         setModalityType(ModalityType.DOCUMENT_MODAL);
 
-        listener = new LogoutListener(mf, this);
+        listener = new DialogListener(this);
 
         checkMessage = new JLabel("로그아웃 하시겠습니까?");
         checkMessage.setFont(new Font("맑은고딕", Font.BOLD, 16));
         checkMessage.setBounds(43, 15, 200, 40);
         add(checkMessage);
 
-        logoutButton = new JButton(Const.YES);
-        logoutButton.setBounds(40, 70, 80, 30);
+        logoutButton = new JButton(Const.LOGOUT);
+        logoutButton.setBounds(37, 70, 90, 30);
         logoutButton.addActionListener(listener);
         add(logoutButton);
 
-        closeButton = new JButton(Const.NO);
-        closeButton.setBounds(140, 70, 80, 30);
+        closeButton = new JButton(Const.CLOSE);
+        closeButton.setBounds(137, 70, 90, 30);
         closeButton.addActionListener(listener);
         add(closeButton);
 

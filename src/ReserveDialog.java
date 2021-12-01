@@ -1,14 +1,22 @@
+import javax.swing.*;
+
 public class ReserveDialog extends InputBidDialog
 {
-    ReserveListener listener;
+    JButton reserveButton;
+
+    DialogListener listener;
     public ReserveDialog(MainFrame mf, String title)
     {
         super(mf, title);
 
-        listener = new ReserveListener(this, mf.getMainScreen().getId());
+        listener = new DialogListener(this);
 
-        yesButton.addActionListener(listener);
-        noButton.addActionListener(listener);
+        reserveButton = new JButton(Const.RESERVE);
+        reserveButton.setBounds(32, 60, 90, 30);
+        reserveButton.addActionListener(listener);
+        this.add(reserveButton);
+
+        closeButton.addActionListener(listener);
 
         setResizable(false);
         setVisible(true);

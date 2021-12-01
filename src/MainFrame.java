@@ -9,6 +9,7 @@ public class MainFrame extends JFrame
     private Container container;
     private Component c;
 
+
     public MainFrame()
     {
         c = this; // Dialog의 처음 위치 지정을 위해
@@ -16,11 +17,10 @@ public class MainFrame extends JFrame
         cards = new CardLayout();
         initialScreen = new InitialScreen(this);
         mainScreen = new MainScreen(this);
-
         setVisible(true);
         setTitle("도서관리 시스템");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(700, 800);
+        setSize(800, 800);
         setLocationRelativeTo(null); // 화면의 중앙에 창이 뜸
         setResizable(false); // 창 크기 변경 불가
         
@@ -33,12 +33,12 @@ public class MainFrame extends JFrame
         return c;
     }
 
-    public void changeScreen(String id) // 로그인 성공 / 로그이웃 시 스크린 교체
+    public void changeToMainScreen(String id)
     {
         cards.next(container);
         mainScreen.setId(id);
     }
-    public void changeScreen()
+    public void changeToInitialScreen()
     {
         cards.next(container);
     }

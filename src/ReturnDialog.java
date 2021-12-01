@@ -2,15 +2,21 @@ import javax.swing.*;
 
 public class ReturnDialog extends InputBidDialog
 {
-    ReturnListener listener;
+    JButton returnButton;
+
+    DialogListener listener;
     public ReturnDialog(MainFrame mf, String title)
     {
         super(mf, title);
 
-        listener = new ReturnListener(this, mf.getMainScreen().getId());
+        listener = new DialogListener(this);
 
-        yesButton.addActionListener(listener);
-        noButton.addActionListener(listener);
+        returnButton = new JButton(Const.RETURN);
+        returnButton.setBounds(32, 60, 90, 30);
+        returnButton.addActionListener(listener);
+        this.add(returnButton);
+
+        closeButton.addActionListener(listener);
 
         setResizable(false);
         setVisible(true);

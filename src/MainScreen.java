@@ -7,6 +7,7 @@ public class MainScreen extends JPanel
     private JPanel searchPanel;
     private JRadioButton titleRadio;
     private JRadioButton authorRadio;
+    private JRadioButton publisherRadio;
     private JTextField searchBar;
     private JButton searchButton;
     private JButton resetButton;
@@ -25,12 +26,15 @@ public class MainScreen extends JPanel
 
     private MainScreenListener listener;
 
-    private String id = null;
+    private String id;
+
+    private MainFrame mf;
 
     public MainScreen(MainFrame mf)
     {
         this.setLayout(new BorderLayout());
 
+        this.mf = mf;
         listener = new MainScreenListener(mf, this);
 
         searchPanel = new JPanel();
@@ -38,20 +42,29 @@ public class MainScreen extends JPanel
         searchPanel.setPreferredSize(new Dimension(0, 60));
         add(searchPanel, BorderLayout.NORTH);
 
-        titleRadio = new JRadioButton("제목");
-        titleRadio.setFont(new Font("맑은고딕", Font.PLAIN, 16));
-        titleRadio.setPreferredSize(new Dimension(60, 50));
+        Font radioFont = new Font("맑은고딕", Font.PLAIN, 14);
+        Dimension radioDimension = new Dimension(70, 50);
+
+        titleRadio = new JRadioButton(Const.TITLE);
+        titleRadio.setFont(radioFont);
+        titleRadio.setPreferredSize(radioDimension);
         titleRadio.setSelected(true);
 
-        authorRadio = new JRadioButton("저자");
-        authorRadio.setFont(new Font("맑은고딕", Font.PLAIN, 16));
-        authorRadio.setPreferredSize(new Dimension(60, 50));
+        authorRadio = new JRadioButton(Const.AUTHOR);
+        authorRadio.setFont(radioFont);
+        authorRadio.setPreferredSize(radioDimension);
+
+        publisherRadio = new JRadioButton(Const.PUBLISHER);
+        publisherRadio.setFont(radioFont);
+        publisherRadio.setPreferredSize(radioDimension);
 
         ButtonGroup buttonGroup = new ButtonGroup();
         buttonGroup.add(titleRadio);
         buttonGroup.add(authorRadio);
+        buttonGroup.add(publisherRadio);
         searchPanel.add(titleRadio);
         searchPanel.add(authorRadio);
+        searchPanel.add(publisherRadio);
 
 
         searchBar = new JTextField(20);
@@ -140,8 +153,22 @@ public class MainScreen extends JPanel
     {
         return searchBar.getText();
     }
-    public boolean isTitleSelected()
+    public String getSelectedCategory()
     {
-        return titleRadio.isSelected();
+        String selectedRadio = "";
+        if (titleRadio.isSelected())
+        {
+            selectedRadio = Const.TITLE;
+        }
+        else if (authorRadio.isSelected())
+        {
+            selectedRadio =  Const.AUTHOR;
+        }
+        else if (publisherRadio.isSelected())
+        {
+            selectedRadio =  Const.PUBLISHER;
+        }
+        return selectedRadio;
     }
+
 }
