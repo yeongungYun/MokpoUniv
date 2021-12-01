@@ -45,8 +45,8 @@ public class BooksDatabase
                                 + "author VARCHAR(15) NOT NULL,"
                                 + "publisher VARCHAR(15) NOT NULL,"
                                 + "publish_date VARCHAR(12) NOT NULL,"
-                                + "isBorrowBy VARCHAR(10),"
-                                + "isReserveBy VARCHAR(10)"
+                                + "is_borrow_by VARCHAR(10),"
+                                + "is_reserve_by VARCHAR(10)"
                                 + ");";
                 Statement statement = connection.createStatement();
                 statement.executeUpdate(sql);
