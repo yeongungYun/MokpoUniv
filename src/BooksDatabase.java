@@ -116,7 +116,7 @@ public class BooksDatabase
 
         String sql = "select * from book";
 
-
+        // 메소드로 통합
         if (isTitleSelected) // 이름으로 검색
         {
             try
