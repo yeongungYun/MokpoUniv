@@ -143,12 +143,12 @@ public class AddDialog extends Dialog
 
     public String getPublishDate()
     {
-        return publishYearField.getText() + "." + publishMonthField + "." + publishDateField;
+        return publishYearField.getText() + "." + publishMonthField.getText() + "." + publishDateField.getText();
     }
 
     public String getRegisterDate()
     {
-        return registerYearField.getText() + "." + registerMonthField + "." + registerDateField;
+        return registerYearField.getText() + "." + registerMonthField.getText() + "." + registerDateField.getText();
     }
 
     public BookTable getTable()

@@ -18,7 +18,6 @@ public class ReserveCancelDialog extends InputBidDialog
         reverseCancelButton.addActionListener(listener);
         this.add(reverseCancelButton);
 
-        reverseCancelButton.addActionListener(listener);
         closeButton.addActionListener(listener);
 
         setResizable(false);

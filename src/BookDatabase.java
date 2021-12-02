@@ -252,7 +252,7 @@ public class BookDatabase
             {
                 if (resultSet.getString("is_borrow_by") == null)
                 {
-                    message = Const.NOT_BORROWED_TO_ME;
+                    message = Const.NOT_BORROWED_BY_ME;
                 }
                 else
                 {
@@ -262,7 +262,7 @@ public class BookDatabase
                     }
                     else
                     {
-                        message = Const.NOT_BORROWED_TO_ME;
+                        message = Const.NOT_BORROWED_BY_ME;
                     }
                 }
             }
@@ -349,13 +349,20 @@ public class BookDatabase
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) // 해당 bid가 존재
             {
-                if (resultSet.getString("is_reserve_by").equals(id)) // 반납 가능
+                if (resultSet.getString("is_reserve_by") == null)
                 {
-                    message = Const.CAN;
+                    message = Const.NOT_RESERVED_BY_ME;
                 }
                 else
                 {
-                    message = Const.NOT_RESERVED_TO_ME; // 내가 예약한 책이 아님
+                    if (resultSet.getString("is_reserve_by").equals(id)) // 반납 가능
+                    {
+                        message = Const.CAN;
+                    }
+                    else
+                    {
+                        message = Const.NOT_RESERVED_BY_ME;
+                    }
                 }
             }
             else // 존재하지 않는 책 번호
@@ -412,7 +419,15 @@ public class BookDatabase
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) // 해당 bid가 존재
             {
-                message = Const.CAN;
+                if (resultSet.getString("is_borrow_by") != null || resultSet.getString("is_reserve_by") != null)
+                // 누군가가 대출 혹은 예약중인 책
+                {
+                    message = Const.CANT_REMOVE;
+                }
+                else
+                {
+                    message = Const.CAN;
+                }
             }
             else // 존재하지 않는 책 번호
             {

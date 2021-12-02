@@ -8,11 +8,11 @@ public class ImagePanel extends JPanel
     private Image image;
     public ImagePanel(String imageAddress)
     {
-        this.setBounds(0, 0, 700, 800);
+        this.setBounds(0, 0, 800, 800);
         try
         {
             image = ImageIO.read(new File(imageAddress));
-            image = image.getScaledInstance(700, 800, Image.SCALE_SMOOTH);
+            image = image.getScaledInstance(800, 800, Image.SCALE_SMOOTH);
         }
         catch (Exception e)
         {

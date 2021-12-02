@@ -171,13 +171,11 @@ public class DialogListener implements ActionListener
                         JOptionPane.showMessageDialog(null,
                                 message, Const.RESERVE_CANCEL, JOptionPane.PLAIN_MESSAGE);
                     }
-
                 }
+                break;
 
             case Const.ADD :
                 AddDialog addDialog = (AddDialog) dialog;
-
-
                 if (!addDialog.fillOutAllForm()) // 기입하지 않은 항목이 있음
                 {
                     JOptionPane.showMessageDialog(null,
@@ -227,6 +225,17 @@ public class DialogListener implements ActionListener
             case Const.CLOSE :
                 dialog.dispose();
                 break;
+
+            case Const.SHOW_PASSWORD :
+                SignUpDialog signUpDialog = (SignUpDialog) dialog;
+                if (signUpDialog.getCheckbox())
+                {
+                    signUpDialog.showPassword();
+                }
+                else
+                {
+                    signUpDialog.hidePassword();
+                }
         }
     }
 }
