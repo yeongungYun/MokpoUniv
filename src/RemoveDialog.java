@@ -2,8 +2,8 @@ import javax.swing.*;
 
 public class RemoveDialog extends InputBidDialog
 {
-    JButton removeButton;
-    DialogListener listener;
+    private JButton removeButton;
+    private DialogListener listener;
     public RemoveDialog(MainFrame mf, String title)
     {
         super(mf, title);

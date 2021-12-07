@@ -3,12 +3,12 @@ import java.awt.*;
 
 public class InputBidDialog extends Dialog
 {
-    String id;
+    private String id;
 
-    JLabel label;
-    JTextField field;
+    private JLabel label;
+    private JTextField field;
 
-    JButton closeButton;
+    protected JButton closeButton;
 
 
     public InputBidDialog(MainFrame mf, String title) // 자식 클래스마다 리스너 만들고 setResizable, setVisible만 하면 됨

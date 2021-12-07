@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class ReserveCancelDialog extends InputBidDialog
 {
-    JButton reverseCancelButton;
+    private JButton reverseCancelButton;
 
     DialogListener listener;
     public ReserveCancelDialog(MainFrame mf, String title)

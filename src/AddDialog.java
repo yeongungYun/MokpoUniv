@@ -3,34 +3,34 @@ import java.awt.*;
 
 public class AddDialog extends Dialog
 {
-    JLabel isbnLabel;
-    JTextField isbnField;
+    private JLabel isbnLabel;
+    private JTextField isbnField;
 
-    JLabel titleLabel;
-    JTextField titleField;
+    private JLabel titleLabel;
+    private JTextField titleField;
 
-    JLabel authorLabel;
-    JTextField authorField;
+    private JLabel authorLabel;
+    private JTextField authorField;
 
-    JLabel publisherLabel;
-    JTextField publisherField;
+    private JLabel publisherLabel;
+    private JTextField publisherField;
 
-    JLabel publishDateLabel;
-    JTextField publishYearField;
-    JTextField publishMonthField;
-    JTextField publishDateField;
+    private JLabel publishDateLabel;
+    private JTextField publishYearField;
+    private JTextField publishMonthField;
+    private JTextField publishDateField;
 
-    JLabel registerDateLabel;
-    JTextField registerYearField;
-    JTextField registerMonthField;
-    JTextField registerDateField;
+    private JLabel registerDateLabel;
+    private JTextField registerYearField;
+    private JTextField registerMonthField;
+    private JTextField registerDateField;
 
-    JButton addButton;
-    JButton closeButton;
+    private JButton addButton;
+    private JButton closeButton;
 
-    DialogListener listener;
+    private DialogListener listener;
 
-    BookTable table;
+    private BookTable table;
 
     public AddDialog(MainFrame mf, String title)
     {

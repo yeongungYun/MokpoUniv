@@ -4,8 +4,8 @@ import java.awt.event.ActionListener;
 
 public class DialogListener implements ActionListener
 {
-    MainFrame mf;
-    Dialog dialog;
+    private MainFrame mf;
+    private Dialog dialog;
 
     public DialogListener(Dialog dialog)
     {

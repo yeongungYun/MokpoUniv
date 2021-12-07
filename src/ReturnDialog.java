@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public class ReturnDialog extends InputBidDialog
 {
-    JButton returnButton;
+    private JButton returnButton;
 
     DialogListener listener;
     public ReturnDialog(MainFrame mf, String title)

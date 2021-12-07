@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public class Dialog extends JDialog
 {
-    MainFrame mf;
+    protected MainFrame mf;
     public Dialog(MainFrame mf, String title)
     {
         super(mf, title);

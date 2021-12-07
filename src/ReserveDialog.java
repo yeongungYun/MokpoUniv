@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public class ReserveDialog extends InputBidDialog
 {
-    JButton reserveButton;
+    private JButton reserveButton;
 
     DialogListener listener;
     public ReserveDialog(MainFrame mf, String title)

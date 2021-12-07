@@ -2,8 +2,8 @@ import javax.swing.*;
 
 public class BorrowDialog extends InputBidDialog
 {
-    JButton borrowButton;
-    DialogListener listener;
+    private JButton borrowButton;
+    private DialogListener listener;
 
     public BorrowDialog(MainFrame mf, String title)
     {

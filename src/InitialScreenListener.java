@@ -3,7 +3,7 @@ import java.awt.event.ActionListener;
 
 public class InitialScreenListener implements ActionListener
 {
-    MainFrame mf;
+    private MainFrame mf;
 
     public InitialScreenListener(MainFrame mf)
     {
