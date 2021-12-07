@@ -33,7 +33,7 @@ public class DialogListener implements ActionListener
                 message = MemberDatabase.getInstance().login(id, password);
                 if (message.equals(Const.LOGIN_COMPLETE))
                 {
-                    mf.changeToMainScreen(id);
+                    mf.login(id);
                     dialog.dispose();
                 }
                 else
@@ -176,7 +176,7 @@ public class DialogListener implements ActionListener
 
             case Const.ADD :
                 AddDialog addDialog = (AddDialog) dialog;
-                if (!addDialog.fillOutAllForm()) // 기입하지 않은 항목이 있음
+                if (!addDialog.isAllFormFilledOut()) // 기입하지 않은 항목이 있음
                 {
                     JOptionPane.showMessageDialog(null,
                             Const.FILL_OUT_FORM, Const.ADD, JOptionPane.PLAIN_MESSAGE);
@@ -190,7 +190,7 @@ public class DialogListener implements ActionListener
                     String publishDate = addDialog.getPublishDate();
                     String registerDate = addDialog.getRegisterDate();
                     BookDatabase.getInstance().add(isbn, title, author, publisher, publishDate, registerDate);
-                    addDialog.getTable().resetTable();
+                    mf.getMainScreen().getTable().resetTable();
                     JOptionPane.showMessageDialog(null,
                             Const.ADD_COMPLETE, Const.ADD, JOptionPane.PLAIN_MESSAGE);
                 }
@@ -219,18 +219,18 @@ public class DialogListener implements ActionListener
 
             case Const.LOGOUT :
                 dialog.dispose();
-                mf.changeToInitialScreen();
+                mf.logout();
                 break;
 
             case Const.CLOSE :
                 dialog.dispose();
                 break;
 
-            case Const.SHOW_PASSWORD :
+            case Const.DISPLAY_PASSWORD:
                 SignUpDialog signUpDialog = (SignUpDialog) dialog;
-                if (signUpDialog.getCheckbox())
+                if (signUpDialog.getCheckBox())
                 {
-                    signUpDialog.showPassword();
+                    signUpDialog.displayPassword();
                 }
                 else
                 {

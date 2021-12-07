@@ -19,10 +19,10 @@ public class MainScreenListener implements ActionListener
         {
             case Const.SEARCH:
                 BookTable table = screen.getTable();
-                String searchText = screen.getText();
+                String searchText = screen.getSearchBarText();
                 if (!searchText.equals(""))
                 {
-                    table.searchTable(screen.getSelectedCategory(), searchText);
+                    table.searchInTable(screen.getSelectedCategory(), searchText);
                 }
                 break;
 

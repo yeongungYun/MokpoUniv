@@ -2,7 +2,7 @@ public class Const
 {
     // 회원가입
     public static final String SIGNUP = "회원가입";
-    public static final String SHOW_PASSWORD = "비밀번호 표시";
+    public static final String DISPLAY_PASSWORD = "비밀번호 표시";
     public static final String WRONG_ID = "아이디가 잘못되었습니다.";
     public static final String WRONG_PASSWORD = "비밀번호가 잘못되었습니다.";
     public static final String DIFFERENT_PASSWORD = "비밀번호가 맞지 않습니다.";

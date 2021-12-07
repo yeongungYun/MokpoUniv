@@ -8,7 +8,7 @@ public class MemberDatabase
 
     private MemberDatabase()
     {
-        initDataBase();
+        initDatabase();
     }
 
     public static MemberDatabase getInstance()
@@ -23,7 +23,7 @@ public class MemberDatabase
         return instance;
     }
 
-    private void initDataBase()
+    private void initDatabase()
     {
         // url = jdbc:mysql://localhost:(포트번호)/(데이터베이스명)
         String url = "jdbc:mysql://localhost:3306/members";

@@ -7,9 +7,8 @@ public class InitialScreen extends JPanel
     private JButton signUpButton;
     private JButton exitButton;
     private ImagePanel imagePanel;
-
-
     private InitialScreenListener listener;
+
     public InitialScreen(MainFrame mf)
     {
         setLayout(null);

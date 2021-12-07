@@ -6,7 +6,6 @@ public class LogoutDialog extends Dialog
     private JLabel checkMessage;
     private JButton logoutButton;
     private JButton closeButton;
-    private DialogListener listener;
 
     public LogoutDialog(MainFrame mf, String title)
     {
@@ -15,8 +14,6 @@ public class LogoutDialog extends Dialog
         setLocationRelativeTo(mf.getComponent());
         setLayout(null);
         setModalityType(ModalityType.DOCUMENT_MODAL);
-
-        listener = new DialogListener(this);
 
         checkMessage = new JLabel("로그아웃 하시겠습니까?");
         checkMessage.setFont(new Font("맑은고딕", Font.BOLD, 16));

@@ -7,12 +7,9 @@ public class MainFrame extends JFrame
     private InitialScreen initialScreen;
     private MainScreen mainScreen;
     private Container container;
-    private Component c;
-
 
     public MainFrame()
     {
-        c = this; // Dialog의 처음 위치 지정을 위해
         container = getContentPane(); // 컨테이너. CardLayout과 연결
         cards = new CardLayout();
         initialScreen = new InitialScreen(this);
@@ -28,17 +25,17 @@ public class MainFrame extends JFrame
         container.add(initialScreen, "1");
         container.add(mainScreen, "2");
     }
-    public Component getComponent()
+    public Component getComponent() // Dialog의 처음 위치 지정을 위해
     {
-        return c;
+        return this;
     }
 
-    public void changeToMainScreen(String id)
+    public void login(String id)
     {
         cards.next(container);
         mainScreen.setId(id);
     }
-    public void changeToInitialScreen()
+    public void logout()
     {
         cards.next(container);
     }

@@ -5,16 +5,14 @@ public class LoginDialog extends Dialog
 {
     private JLabel idLabel;
     private JLabel idRule;
-    private JTextField idInputField;
+    private JTextField idField;
 
-    private JPasswordField passwordInputField;
-    private JLabel passwordRule;
     private JLabel passwordLabel;
+    private JLabel passwordRule;
+    private JPasswordField passwordField;
 
     private JButton loginButton;
     private JButton closeButton;
-
-    private DialogListener listener;
 
     public LoginDialog(MainFrame mf, String title)
     {
@@ -26,8 +24,6 @@ public class LoginDialog extends Dialog
 
         setModalityType(ModalityType.DOCUMENT_MODAL);
 
-        listener = new DialogListener(this);
-
         idLabel = new JLabel("아이디");
         idLabel.setFont(new Font("맑은고딕", Font.BOLD, 14));
         idLabel.setBounds(40, 20, 80, 25);
@@ -38,9 +34,9 @@ public class LoginDialog extends Dialog
         idRule.setBounds(105, 6, 140, 10);
         add(idRule);
 
-        idInputField = new JTextField(10);
-        idInputField.setBounds(100, 20, 140, 25);
-        add(idInputField);
+        idField = new JTextField(10);
+        idField.setBounds(100, 20, 140, 25);
+        add(idField);
 
         //
 
@@ -54,9 +50,9 @@ public class LoginDialog extends Dialog
         passwordRule.setBounds(105, 47, 140, 10);
         add(passwordRule);
 
-        passwordInputField = new JPasswordField(10);
-        passwordInputField.setBounds(100, 60, 140, 25);
-        add(passwordInputField);
+        passwordField = new JPasswordField(10);
+        passwordField.setBounds(100, 60, 140, 25);
+        add(passwordField);
         //
 
         loginButton = new JButton(Const.LOGIN);
@@ -75,10 +71,10 @@ public class LoginDialog extends Dialog
 
     public String getId()
     {
-        return idInputField.getText();
+        return idField.getText();
     }
     public String getPassword()
     {
-        return new String(passwordInputField.getPassword());
+        return new String(passwordField.getPassword());
     }
 }

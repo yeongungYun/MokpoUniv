@@ -17,11 +17,9 @@ public class SignUpDialog extends Dialog
     private JButton signUpButton;
     private JButton closeButton;
 
-    private JTextField showPasswordField;
-    private JTextField showAgainPasswordField;
-    private JCheckBox checkbox;
-
-    private DialogListener listener;
+    private JTextField displayPasswordField;
+    private JTextField displayAgainPasswordField;
+    private JCheckBox checkBox;
 
     public SignUpDialog(MainFrame mf, String title)
     {
@@ -32,8 +30,6 @@ public class SignUpDialog extends Dialog
         setLayout(null);
 
         setModalityType(ModalityType.DOCUMENT_MODAL);
-
-        listener = new DialogListener(this);
 
         idLabel = new JLabel("아이디");
         idLabel.setFont(new Font("맑은고딕", Font.BOLD, 13));
@@ -65,8 +61,8 @@ public class SignUpDialog extends Dialog
         passwordField.setBounds(100, 70, 145, 25);
         add(passwordField);
 
-        showPasswordField = new JTextField(12);
-        showPasswordField.setBounds(100, 70, 145, 25);
+        displayPasswordField = new JTextField(12);
+        displayPasswordField.setBounds(100, 70, 145, 25);
 
 
         //
@@ -80,16 +76,16 @@ public class SignUpDialog extends Dialog
         againPasswordField.setBounds(100, 115, 145, 25);
         add(againPasswordField);
 
-        showAgainPasswordField = new JTextField(12);
-        showAgainPasswordField.setBounds(100, 115, 145, 25);
+        displayAgainPasswordField = new JTextField(12);
+        displayAgainPasswordField.setBounds(100, 115, 145, 25);
 
         //
 
-        checkbox = new JCheckBox(Const.SHOW_PASSWORD);
-        checkbox.setFont(new Font("맑은고딕", Font.PLAIN, 11));
-        checkbox.setBounds(15, 142, 120, 20);
-        checkbox.addActionListener(listener);
-        add(checkbox);
+        checkBox = new JCheckBox(Const.DISPLAY_PASSWORD);
+        checkBox.setFont(new Font("맑은고딕", Font.PLAIN, 11));
+        checkBox.setBounds(15, 142, 120, 20);
+        checkBox.addActionListener(listener);
+        add(checkBox);
 
         signUpButton = new JButton(Const.SIGNUP);
         signUpButton.setBounds(47, 170, 85, 30);
@@ -130,26 +126,26 @@ public class SignUpDialog extends Dialog
     {
         againPasswordField.setText("");
     }
-    public boolean getCheckbox()
+    public boolean getCheckBox()
     {
-        return checkbox.isSelected();
+        return checkBox.isSelected();
     }
 
-    public void showPassword()
+    public void displayPassword()
     {
-        showPasswordField.setText(getPassword());
-        showAgainPasswordField.setText(getAgainPassword());
+        displayPasswordField.setText(getPassword());
+        displayAgainPasswordField.setText(getAgainPassword());
         remove(passwordField);
         remove(againPasswordField);
-        add(showPasswordField);
-        add(showAgainPasswordField);
+        add(displayPasswordField);
+        add(displayAgainPasswordField);
     }
     public void hidePassword()
     {
-        passwordField.setText(showPasswordField.getText());
-        againPasswordField.setText(showAgainPasswordField.getText());
-        remove(showPasswordField);
-        remove(showAgainPasswordField);
+        passwordField.setText(displayPasswordField.getText());
+        againPasswordField.setText(displayAgainPasswordField.getText());
+        remove(displayPasswordField);
+        remove(displayAgainPasswordField);
         add(passwordField);
         add(againPasswordField);
     }

@@ -5,9 +5,11 @@ public class BookDatabase
     private volatile static BookDatabase instance = null;
     private Connection connection;
 
+    private static String[] header;
+
     private BookDatabase()
     {
-        initDataBase();
+        initDatabase();
     }
 
     public static BookDatabase getInstance()
@@ -22,8 +24,10 @@ public class BookDatabase
         return instance;
     }
 
-    private void initDataBase()
+    private void initDatabase()
     {
+        header = new String[] {"번호", "isbn", "제목", "저자", "출판사",
+            "출판일", "등록일", "대출", "예약"};
         // url = jdbc:mysql://localhost:(포트번호)/(데이터베이스명)
         String url = "jdbc:mysql://localhost:3306/books";
         // userName = 데이터베이스 아이디
@@ -49,6 +53,7 @@ public class BookDatabase
                                 + ");";
                 Statement statement = connection.createStatement();
                 statement.executeUpdate(sql);
+
             }
         }
         catch (SQLException e)
@@ -79,8 +84,9 @@ public class BookDatabase
         return ret;
     }
 
-    public FreezeModel initModel(FreezeModel model)
+    public FreezeModel initModel()
     {
+        FreezeModel model = new FreezeModel(header, 0);
         String sql = "SELECT * FROM book;";
         try
         {
@@ -109,8 +115,10 @@ public class BookDatabase
         return model;
     }
 
-    public FreezeModel SearchData(FreezeModel model, String searchCategory, String searchText)
+    public FreezeModel searchData(String searchCategory, String searchText)
     {
+        FreezeModel model = new FreezeModel(header, 0);
+
         // 모든 공백 제거 후 소문자로 변경
         String text = searchText.toLowerCase().replaceAll("\\s", "");
 
@@ -163,8 +171,9 @@ public class BookDatabase
         return model;
     }
 
-    public FreezeModel myInformation(FreezeModel model, String id)
+    public FreezeModel myInformation(String id)
     {
+        FreezeModel model = new FreezeModel(header, 0);
         String sql = "SELECT * FROM book WHERE is_borrow_by='" + id + "' OR is_reserve_by='" + id + "';";
         try
         {

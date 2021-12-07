@@ -8,7 +8,7 @@ public class InputBidDialog extends Dialog
     private JLabel label;
     private JTextField field;
 
-    protected JButton closeButton;
+    private JButton closeButton;
 
 
     public InputBidDialog(MainFrame mf, String title) // 자식 클래스마다 리스너 만들고 setResizable, setVisible만 하면 됨
@@ -32,6 +32,7 @@ public class InputBidDialog extends Dialog
 
         closeButton = new JButton(Const.CLOSE);
         closeButton.setBounds(132, 60, 90, 30);
+        closeButton.addActionListener(listener);
         this.add(closeButton);
 
     }

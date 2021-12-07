@@ -28,10 +28,6 @@ public class AddDialog extends Dialog
     private JButton addButton;
     private JButton closeButton;
 
-    private DialogListener listener;
-
-    private BookTable table;
-
     public AddDialog(MainFrame mf, String title)
     {
         super(mf, title);
@@ -39,8 +35,6 @@ public class AddDialog extends Dialog
         setLocationRelativeTo(mf.getComponent());
         setLayout(null);
         setModalityType(ModalityType.DOCUMENT_MODAL);
-
-        listener = new DialogListener(this);
 
         Font font = new Font("맑은고딕", Font.PLAIN, 14);
 
@@ -115,8 +109,6 @@ public class AddDialog extends Dialog
         closeButton.addActionListener(listener);
         add(closeButton);
 
-        table = mf.getMainScreen().getTable();
-
         setResizable(false);
         setVisible(true);
     }
@@ -151,12 +143,7 @@ public class AddDialog extends Dialog
         return registerYearField.getText() + "." + registerMonthField.getText() + "." + registerDateField.getText();
     }
 
-    public BookTable getTable()
-    {
-        return table;
-    }
-
-    public boolean fillOutAllForm()
+    public boolean isAllFormFilledOut()
     {
         boolean ret = true;
         if (isbnField.getText().equals("") || titleField.getText().equals("")
