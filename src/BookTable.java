@@ -44,8 +44,8 @@ public class BookTable extends JPanel
         this.table.getColumnModel().getColumn(4).setPreferredWidth(60); // publisher
         this.table.getColumnModel().getColumn(5).setPreferredWidth(50); // publish_date
         this.table.getColumnModel().getColumn(6).setPreferredWidth(50); // register_date
-        this.table.getColumnModel().getColumn(7).setPreferredWidth(2);  // is_borrow_by
-        this.table.getColumnModel().getColumn(8).setPreferredWidth(2);  // is_reserve_by
+        this.table.getColumnModel().getColumn(7).setPreferredWidth(2);  // borrowed_by
+        this.table.getColumnModel().getColumn(8).setPreferredWidth(2);  // reserved_by
         this.table.setRowHeight(25);
     }
 }

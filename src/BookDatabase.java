@@ -48,8 +48,8 @@ public class BookDatabase
                                 + "publisher VARCHAR(15) NOT NULL,"
                                 + "publish_date VARCHAR(12) NOT NULL,"
                                 + "register_date VARCHAR(12) NOT NULL,"
-                                + "is_borrow_by VARCHAR(10),"
-                                + "is_reserve_by VARCHAR(10)"
+                                + "borrowed_by VARCHAR(10),"
+                                + "reserved_by VARCHAR(10)"
                                 + ");";
                 Statement statement = connection.createStatement();
                 statement.executeUpdate(sql);
@@ -101,8 +101,8 @@ public class BookDatabase
                 String publisher = resultSet.getString("publisher");
                 String publishDate = resultSet.getString("publish_date");
                 String registerDate = resultSet.getString("register_date");
-                String isBorrowBy = (resultSet.getString("is_borrow_by") == null ? "O" : "X");
-                String isReserveBy = (resultSet.getString("is_reserve_by") == null ? "O" : "X");
+                String isBorrowBy = (resultSet.getString("borrowed_by") == null ? "O" : "X");
+                String isReserveBy = (resultSet.getString("reserved_by") == null ? "O" : "X");
                 String[] row = new String[] {bid, isbn, title, author, publisher, publishDate,
                         registerDate, isBorrowBy, isReserveBy};
                 model.addRow(row);
@@ -156,8 +156,8 @@ public class BookDatabase
                     String publisher = resultSet.getString("publisher");
                     String publishDate = resultSet.getString("publish_date");
                     String registerDate = resultSet.getString("register_date");
-                    String isBorrowBy = (resultSet.getString("is_borrow_by") == null ? "O" : "X");
-                    String isReserveBy = (resultSet.getString("is_reserve_by") == null ? "O" : "X");
+                    String isBorrowBy = (resultSet.getString("borrowed_by") == null ? "O" : "X");
+                    String isReserveBy = (resultSet.getString("reserved_by") == null ? "O" : "X");
                     String[] row = new String[] {bid, isbn, title, author, publisher, publishDate,
                             registerDate, isBorrowBy, isReserveBy};
                     model.addRow(row);
@@ -174,7 +174,7 @@ public class BookDatabase
     public FreezeModel myInformation(String id)
     {
         FreezeModel model = new FreezeModel(header, 0);
-        String sql = "SELECT * FROM book WHERE is_borrow_by='" + id + "' OR is_reserve_by='" + id + "';";
+        String sql = "SELECT * FROM book WHERE borrowed_by='" + id + "' OR reserved_by='" + id + "';";
         try
         {
             Statement statement = connection.createStatement();
@@ -189,8 +189,8 @@ public class BookDatabase
                 String publisher = resultSet.getString("publisher");
                 String publishDate = resultSet.getString("publish_date");
                 String registerDate = resultSet.getString("register_date");
-                String isBorrowBy = (resultSet.getString("is_borrow_by") == null ? "O" : "X");
-                String isReserveBy = (resultSet.getString("is_reserve_by") == null ? "O" : "X");
+                String isBorrowBy = (resultSet.getString("borrowed_by") == null ? "O" : "X");
+                String isReserveBy = (resultSet.getString("reserved_by") == null ? "O" : "X");
                 String[] row = new String[] {bid, isbn, title, author, publisher, publishDate,
                         registerDate, isBorrowBy, isReserveBy};
                 model.addRow(row);
@@ -213,7 +213,7 @@ public class BookDatabase
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) // 해당 bid가 존재
             {
-                if (resultSet.getString("is_borrow_by") == null) // 대출 가능
+                if (resultSet.getString("borrowed_by") == null) // 대출 가능
                 {
                     message = Const.CAN;
                 }
@@ -238,7 +238,7 @@ public class BookDatabase
     public boolean borrow(int bid, String id)
     {
         boolean ret = false;
-        String sql = "UPDATE book SET is_borrow_by='" + id + "' WHERE bid='" + bid + "';";
+        String sql = "UPDATE book SET borrowed_by='" + id + "' WHERE bid='" + bid + "';";
         try
         {
             Statement statement = connection.createStatement();
@@ -262,13 +262,13 @@ public class BookDatabase
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) // 존재하는 bid
             {
-                if (resultSet.getString("is_borrow_by") == null)
+                if (resultSet.getString("borrowed_by") == null)
                 {
                     message = Const.NOT_BORROWED_BY_ME;
                 }
                 else
                 {
-                    if (resultSet.getString("is_borrow_by").equals(id))
+                    if (resultSet.getString("borrowed_by").equals(id))
                     {
                         message = Const.CAN;
                     }
@@ -294,7 +294,7 @@ public class BookDatabase
     public boolean returnBook(int bid)
     {
         boolean ret = false;
-        String sql = "UPDATE book SET is_borrow_by=NULL WHERE bid='" + bid + "';";
+        String sql = "UPDATE book SET borrowed_by=NULL WHERE bid='" + bid + "';";
         try
         {
             Statement statement = connection.createStatement();
@@ -318,7 +318,7 @@ public class BookDatabase
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) // 존재하는 bid
             {
-                if (resultSet.getString("is_reserve_by") == null) // 예약 가능
+                if (resultSet.getString("reserved_by") == null) // 예약 가능
                 {
                     message = Const.CAN;
                 }
@@ -343,7 +343,7 @@ public class BookDatabase
     public boolean reserve(int bid, String id)
     {
         boolean ret = false;
-        String sql = "UPDATE book SET is_reserve_by='" + id + "' WHERE bid='" + bid + "';";
+        String sql = "UPDATE book SET reserved_by='" + id + "' WHERE bid='" + bid + "';";
         try
         {
             Statement statement = connection.createStatement();
@@ -367,13 +367,13 @@ public class BookDatabase
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) // 해당 bid가 존재
             {
-                if (resultSet.getString("is_reserve_by") == null)
+                if (resultSet.getString("reserved_by") == null)
                 {
                     message = Const.NOT_RESERVED_BY_ME;
                 }
                 else
                 {
-                    if (resultSet.getString("is_reserve_by").equals(id)) // 반납 가능
+                    if (resultSet.getString("reserved_by").equals(id)) // 반납 가능
                     {
                         message = Const.CAN;
                     }
@@ -399,7 +399,7 @@ public class BookDatabase
     public boolean reserveCancel(int bid)
     {
         boolean ret = false;
-        String sql = "UPDATE book SET is_reserve_by=NULL WHERE bid='" + bid + "';";
+        String sql = "UPDATE book SET reserved_by=NULL WHERE bid='" + bid + "';";
         try
         {
             Statement statement = connection.createStatement();
@@ -440,7 +440,7 @@ public class BookDatabase
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) // 해당 bid가 존재
             {
-                if (resultSet.getString("is_borrow_by") != null || resultSet.getString("is_reserve_by") != null)
+                if (resultSet.getString("borrowed_by") != null || resultSet.getString("reserved_by") != null)
                 // 누군가가 대출 혹은 예약중인 책
                 {
                     message = Const.CANT_REMOVE;
