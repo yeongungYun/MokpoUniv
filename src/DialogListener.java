@@ -4,13 +4,13 @@ import java.awt.event.ActionListener;
 
 public class DialogListener implements ActionListener
 {
-    private MainFrame mf;
+    private MainFrame mainFrame;
     private Dialog dialog;
 
     public DialogListener(Dialog dialog)
     {
         this.dialog = dialog;
-        this.mf = dialog.getMainFrame();
+        this.mainFrame = dialog.getMainFrame();
     }
 
 
@@ -33,7 +33,7 @@ public class DialogListener implements ActionListener
                 message = MemberDatabase.getInstance().login(id, password);
                 if (message.equals(Const.LOGIN_COMPLETE))
                 {
-                    mf.login(id);
+                    mainFrame.login(id);
                     dialog.dispose();
                 }
                 else
@@ -64,7 +64,7 @@ public class DialogListener implements ActionListener
                 }
                 else
                 {
-                    message = MemberDatabase.getInstance().signUp(id, password, againPassword);
+                    message = MemberDatabase.getInstance().signUp(id, password);
                 }
 
                 JOptionPane.showMessageDialog(null,
@@ -190,9 +190,10 @@ public class DialogListener implements ActionListener
                     String publishDate = addDialog.getPublishDate();
                     String registerDate = addDialog.getRegisterDate();
                     BookDatabase.getInstance().add(isbn, title, author, publisher, publishDate, registerDate);
-                    mf.getMainScreen().getTable().resetTable();
+                    mainFrame.getMainScreen().getTable().resetTable();
                     JOptionPane.showMessageDialog(null,
                             Const.ADD_COMPLETE, Const.ADD, JOptionPane.PLAIN_MESSAGE);
+                    addDialog.initAllForm();
                 }
                 break;
 
@@ -219,7 +220,7 @@ public class DialogListener implements ActionListener
 
             case Const.LOGOUT :
                 dialog.dispose();
-                mf.logout();
+                mainFrame.logout();
                 break;
 
             case Const.CLOSE :

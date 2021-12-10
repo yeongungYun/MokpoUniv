@@ -11,12 +11,12 @@ public class InputBidDialog extends Dialog
     private JButton closeButton;
 
 
-    public InputBidDialog(MainFrame mf, String title) // 자식 클래스마다 리스너 만들고 setResizable, setVisible만 하면 됨
+    public InputBidDialog(MainFrame mainFrame, String title) // 자식 클래스마다 리스너 만들고 setResizable, setVisible만 하면 됨
     {
-        super(mf, title);
-        this.id = mf.getMainScreen().getId();
+        super(mainFrame, title);
+        this.id = mainFrame.getMainScreen().getId();
         setSize(280, 150);
-        setLocationRelativeTo(mf.getComponent());
+        setLocationRelativeTo(mainFrame.getComponent());
         setLayout(null);
         setModalityType(ModalityType.DOCUMENT_MODAL);
 
@@ -52,7 +52,7 @@ public class InputBidDialog extends Dialog
 
     public BookTable getTable()
     {
-        return mf.getMainScreen().getTable();
+        return mainFrame.getMainScreen().getTable();
     }
 
     public String getId()

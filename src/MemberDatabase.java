@@ -97,7 +97,7 @@ public class MemberDatabase
         }
     }
 
-    public String signUp(String id, String password, String againPassword)
+    public String signUp(String id, String password)
     {
         try
         {
@@ -121,5 +121,10 @@ public class MemberDatabase
             e.printStackTrace();
             return Const.SIGNUP_ERROR;
         }
+    }
+
+    public boolean checkExistsTableTest()
+    {
+        return checkExistsTable();
     }
 }

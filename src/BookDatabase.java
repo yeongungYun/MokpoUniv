@@ -235,18 +235,21 @@ public class BookDatabase
         return message;
     }
 
-    public void borrow(int bid, String id)
+    public boolean borrow(int bid, String id)
     {
+        boolean ret = false;
         String sql = "UPDATE book SET is_borrow_by='" + id + "' WHERE bid='" + bid + "';";
         try
         {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sql);
+            ret = true;
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+        return ret;
     }
 
     public String returnCheckMessage(int bid, String id)
@@ -288,18 +291,21 @@ public class BookDatabase
         return message;
     }
 
-    public void returnBook(int bid)
+    public boolean returnBook(int bid)
     {
+        boolean ret = false;
         String sql = "UPDATE book SET is_borrow_by=NULL WHERE bid='" + bid + "';";
         try
         {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sql);
+            ret = true;
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+        return ret;
     }
 
     public String reserveCheckMessage(int bid)
@@ -334,18 +340,21 @@ public class BookDatabase
         return message;
     }
 
-    public void reserve(int bid, String id)
+    public boolean reserve(int bid, String id)
     {
+        boolean ret = false;
         String sql = "UPDATE book SET is_reserve_by='" + id + "' WHERE bid='" + bid + "';";
         try
         {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sql);
+            ret = true;
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+        return ret;
     }
 
     public String reserveCancelCheckMessage(int bid, String id)
@@ -387,18 +396,21 @@ public class BookDatabase
         return message;
     }
 
-    public void reserveCancel(int bid)
+    public boolean reserveCancel(int bid)
     {
+        boolean ret = false;
         String sql = "UPDATE book SET is_reserve_by=NULL WHERE bid='" + bid + "';";
         try
         {
             Statement statement = connection.createStatement();
             statement.executeUpdate(sql);
+            ret = true;
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
+        return ret;
     }
 
     public void add(String isbn, String title, String author, String publisher,
@@ -463,5 +475,11 @@ public class BookDatabase
         {
             e.printStackTrace();
         }
+    }
+
+    // Test
+    public boolean checkExistsTableTest()
+    {
+        return checkExistsTable();
     }
 }

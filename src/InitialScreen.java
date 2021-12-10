@@ -9,13 +9,13 @@ public class InitialScreen extends JPanel
     private ImagePanel imagePanel;
     private InitialScreenListener listener;
 
-    public InitialScreen(MainFrame mf)
+    public InitialScreen(MainFrame mainFrame)
     {
         setLayout(null);
         imagePanel = new ImagePanel("img/MainImage.png");
         setBackground(Color.LIGHT_GRAY);
 
-        listener = new InitialScreenListener(mf);
+        listener = new InitialScreenListener(mainFrame);
 
         Font font = new Font("맑은고딕", Font.BOLD, 18);
 

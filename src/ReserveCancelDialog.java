@@ -5,9 +5,9 @@ public class ReserveCancelDialog extends InputBidDialog
 {
     private JButton reverseCancelButton;
 
-    public ReserveCancelDialog(MainFrame mf, String title)
+    public ReserveCancelDialog(MainFrame mainFrame, String title)
     {
-        super(mf, title);
+        super(mainFrame, title);
 
         reverseCancelButton = new JButton(Const.RESERVE_CANCEL);
         reverseCancelButton.setBounds(32, 60, 90, 30);

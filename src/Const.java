@@ -17,9 +17,6 @@ public class Const
     public static final String LOGIN_ERROR = "로그인 중 오류 발생";
 
     // 메인 스크린
-    public static final String TITLE = "제목";
-    public static final String AUTHOR = "저자";
-    public static final String PUBLISHER = "출판사";
     public static final String SEARCH = "검색";
     public static final String RESET = "초기화";
     public static final String MY_INFORMATION = "내 정보";
@@ -65,4 +62,11 @@ public class Const
     public static final String EXIT = "종료";
     public static final String CAN = "가능";
     public static final String NON_EXISTENET_BID = "존재하지 않는 책번호입니다.";
+
+    public static final String ISBN = "isbn-13";
+    public static final String TITLE = "제목";
+    public static final String AUTHOR = "저자";
+    public static final String PUBLISHER = "출판사";
+    public static final String PUBLISH_DATE = "출판일";
+    public static final String REGISTER_DATE = "등록일";
 }

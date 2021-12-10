@@ -7,11 +7,11 @@ public class LogoutDialog extends Dialog
     private JButton logoutButton;
     private JButton closeButton;
 
-    public LogoutDialog(MainFrame mf, String title)
+    public LogoutDialog(MainFrame mainFrame, String title)
     {
-        super(mf, title);
+        super(mainFrame, title);
         setSize(280, 150);
-        setLocationRelativeTo(mf.getComponent());
+        setLocationRelativeTo(mainFrame.getComponent());
         setLayout(null);
         setModalityType(ModalityType.DOCUMENT_MODAL);
 

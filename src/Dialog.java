@@ -2,17 +2,17 @@ import javax.swing.*;
 
 public class Dialog extends JDialog
 {
-    protected MainFrame mf;
+    protected MainFrame mainFrame;
     protected DialogListener listener;
-    public Dialog(MainFrame mf, String title)
+    public Dialog(MainFrame mainFrame, String title)
     {
-        super(mf, title);
-        this.mf = mf;
+        super(mainFrame, title);
+        this.mainFrame = mainFrame;
         listener = new DialogListener(this);
     }
 
     public MainFrame getMainFrame()
     {
-        return mf;
+        return mainFrame;
     }
 }

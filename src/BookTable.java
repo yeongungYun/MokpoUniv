@@ -38,7 +38,7 @@ public class BookTable extends JPanel
     private void setTableWidth()
     {
         this.table.getColumnModel().getColumn(0).setPreferredWidth(2);  // bid
-        this.table.getColumnModel().getColumn(1).setPreferredWidth(80);  // isbn
+        this.table.getColumnModel().getColumn(1).setPreferredWidth(80);  // isbn-13
         this.table.getColumnModel().getColumn(2).setPreferredWidth(100); // title
         this.table.getColumnModel().getColumn(3).setPreferredWidth(60); // author
         this.table.getColumnModel().getColumn(4).setPreferredWidth(60); // publisher

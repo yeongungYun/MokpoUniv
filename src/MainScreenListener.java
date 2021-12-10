@@ -3,12 +3,12 @@ import java.awt.event.ActionListener;
 
 public class MainScreenListener implements ActionListener
 {
-    private MainFrame mf;
+    private MainFrame mainFrame;
     private MainScreen screen;
 
-    public MainScreenListener(MainFrame mf, MainScreen screen)
+    public MainScreenListener(MainFrame mainFrame, MainScreen screen)
     {
-        this.mf = mf;
+        this.mainFrame = mainFrame;
         this.screen = screen;
     }
 
@@ -36,31 +36,31 @@ public class MainScreenListener implements ActionListener
                 break;
 
             case Const.BORROW:
-                new BorrowDialog(mf, Const.BORROW);
+                new BorrowDialog(mainFrame, Const.BORROW);
                 break;
 
             case Const.RETURN:
-                new ReturnDialog(mf, Const.RETURN);
+                new ReturnDialog(mainFrame, Const.RETURN);
                 break;
 
             case Const.RESERVE:
-                new ReserveDialog(mf, Const.RESERVE);
+                new ReserveDialog(mainFrame, Const.RESERVE);
                 break;
 
             case Const.RESERVE_CANCEL:
-                new ReserveCancelDialog(mf, Const.RESERVE_CANCEL);
+                new ReserveCancelDialog(mainFrame, Const.RESERVE_CANCEL);
                 break;
 
             case Const.ADD:
-                new AddDialog(mf, Const.ADD);
+                new AddDialog(mainFrame, Const.ADD);
                 break;
 
             case Const.REMOVE:
-                new RemoveDialog(mf, Const.REMOVE);
+                new RemoveDialog(mainFrame, Const.REMOVE);
                 break;
 
             case Const.LOGOUT:
-                new LogoutDialog(mf, Const.LOGOUT);
+                new LogoutDialog(mainFrame, Const.LOGOUT);
                 break;
         }
     }

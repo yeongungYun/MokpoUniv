@@ -14,12 +14,12 @@ public class LoginDialog extends Dialog
     private JButton loginButton;
     private JButton closeButton;
 
-    public LoginDialog(MainFrame mf, String title)
+    public LoginDialog(MainFrame mainFrame, String title)
     {
-        super(mf, title);
+        super(mainFrame, title);
 
         setSize(300, 190);
-        setLocationRelativeTo(mf.getComponent());
+        setLocationRelativeTo(mainFrame.getComponent());
         setLayout(null);
 
         setModalityType(ModalityType.DOCUMENT_MODAL);

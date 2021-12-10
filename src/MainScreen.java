@@ -28,11 +28,11 @@ public class MainScreen extends JPanel
 
     private String id;
 
-    public MainScreen(MainFrame mf)
+    public MainScreen(MainFrame mainFrame)
     {
         this.setLayout(new BorderLayout());
 
-        listener = new MainScreenListener(mf, this);
+        listener = new MainScreenListener(mainFrame, this);
 
         searchPanel = new JPanel();
         searchPanel.setLayout(new FlowLayout());

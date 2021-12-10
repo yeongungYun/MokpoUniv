@@ -3,11 +3,11 @@ import java.awt.event.ActionListener;
 
 public class InitialScreenListener implements ActionListener
 {
-    private MainFrame mf;
+    private MainFrame mainFrame;
 
-    public InitialScreenListener(MainFrame mf)
+    public InitialScreenListener(MainFrame mainFrame)
     {
-        this.mf = mf;
+        this.mainFrame = mainFrame;
     }
 
     @Override
@@ -16,11 +16,11 @@ public class InitialScreenListener implements ActionListener
         switch (e.getActionCommand())
         {
             case Const.LOGIN :
-                new LoginDialog(mf, Const.LOGIN);
+                new LoginDialog(mainFrame, Const.LOGIN);
                 break;
 
             case Const.SIGNUP :
-                new SignUpDialog(mf, Const.SIGNUP);
+                new SignUpDialog(mainFrame, Const.SIGNUP);
                 break;
 
             case Const.EXIT :

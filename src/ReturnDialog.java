@@ -4,9 +4,9 @@ public class ReturnDialog extends InputBidDialog
 {
     private JButton returnButton;
 
-    public ReturnDialog(MainFrame mf, String title)
+    public ReturnDialog(MainFrame mainFrame, String title)
     {
-        super(mf, title);
+        super(mainFrame, title);
 
         returnButton = new JButton(Const.RETURN);
         returnButton.setBounds(32, 60, 90, 30);

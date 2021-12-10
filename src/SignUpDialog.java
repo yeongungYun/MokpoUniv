@@ -21,12 +21,12 @@ public class SignUpDialog extends Dialog
     private JTextField displayAgainPasswordField;
     private JCheckBox checkBox;
 
-    public SignUpDialog(MainFrame mf, String title)
+    public SignUpDialog(MainFrame mainFrame, String title)
     {
-        super(mf, title);
+        super(mainFrame, title);
 
         setSize(300, 260);
-        setLocationRelativeTo(mf.getComponent());
+        setLocationRelativeTo(mainFrame.getComponent());
         setLayout(null);
 
         setModalityType(ModalityType.DOCUMENT_MODAL);

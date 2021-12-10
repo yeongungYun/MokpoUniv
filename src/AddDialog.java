@@ -38,7 +38,7 @@ public class AddDialog extends Dialog
 
         Font font = new Font("맑은고딕", Font.PLAIN, 14);
 
-        isbnLabel = new JLabel("isbn");
+        isbnLabel = new JLabel(Const.ISBN);
         isbnLabel.setFont(font);
         isbnLabel.setBounds(47, 10, 60, 30);
         add(isbnLabel);
@@ -46,7 +46,7 @@ public class AddDialog extends Dialog
         isbnField.setBounds(100, 10, 130, 30);
         add(isbnField);
 
-        titleLabel = new JLabel("제목");
+        titleLabel = new JLabel(Const.TITLE);
         titleLabel.setFont(font);
         titleLabel.setBounds(47, 45, 60, 30);
         add(titleLabel);
@@ -54,7 +54,7 @@ public class AddDialog extends Dialog
         titleField.setBounds(100, 45, 130, 30);
         add(titleField);
 
-        authorLabel = new JLabel("저자");
+        authorLabel = new JLabel(Const.AUTHOR);
         authorLabel.setFont(font);
         authorLabel.setBounds(47, 80, 60, 30);
         add(authorLabel);
@@ -62,7 +62,7 @@ public class AddDialog extends Dialog
         authorField.setBounds(100, 80, 130, 30);
         add(authorField);
 
-        publisherLabel = new JLabel("출판사");
+        publisherLabel = new JLabel(Const.PUBLISHER);
         publisherLabel.setFont(font);
         publisherLabel.setBounds(40, 115, 60 ,30);
         add(publisherLabel);
@@ -70,7 +70,7 @@ public class AddDialog extends Dialog
         publisherField.setBounds(100, 115, 130, 30);
         add(publisherField);
 
-        publishDateLabel = new JLabel("출판일");
+        publishDateLabel = new JLabel(Const.PUBLISH_DATE);
         publishDateLabel.setFont(font);
         publishDateLabel.setBounds(40, 150, 60, 30);
         add(publishDateLabel);
@@ -85,7 +85,7 @@ public class AddDialog extends Dialog
         add(publishDateField);
 
 
-        registerDateLabel = new JLabel("등록일");
+        registerDateLabel = new JLabel(Const.REGISTER_DATE);
         registerDateLabel.setFont(font);
         registerDateLabel.setBounds(40, 185, 60 ,30);
         add(registerDateLabel);
@@ -155,5 +155,19 @@ public class AddDialog extends Dialog
             ret = false;
         }
         return ret;
+    }
+
+    public void initAllForm()
+    {
+        isbnField.setText("");
+        titleField.setText("");
+        authorField.setText("");
+        publisherField.setText("");
+        publishYearField.setText("");
+        publishMonthField.setText("");
+        publishDateField.setText("");
+        registerYearField.setText("");
+        registerMonthField.setText("");
+        registerDateField.setText("");
     }
 }

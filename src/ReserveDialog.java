@@ -4,9 +4,9 @@ public class ReserveDialog extends InputBidDialog
 {
     private JButton reserveButton;
 
-    public ReserveDialog(MainFrame mf, String title)
+    public ReserveDialog(MainFrame mainFrame, String title)
     {
-        super(mf, title);
+        super(mainFrame, title);
 
         reserveButton = new JButton(Const.RESERVE);
         reserveButton.setBounds(32, 60, 90, 30);
