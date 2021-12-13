@@ -42,9 +42,9 @@ public class BookDatabase
                 String sql =
                         "CREATE TABLE book ("
                                 + "bid INT PRIMARY KEY AUTO_INCREMENT NOT NULL,"
-                                + "isbn VARCHAR(15) NOT NULL,"
-                                + "title VARCHAR(20) NOT NULL,"
-                                + "author VARCHAR(15) NOT NULL,"
+                                + "isbn VARCHAR(13) NOT NULL,"
+                                + "title VARCHAR(40) NOT NULL,"
+                                + "author VARCHAR(30) NOT NULL,"
                                 + "publisher VARCHAR(15) NOT NULL,"
                                 + "publish_date VARCHAR(12) NOT NULL,"
                                 + "register_date VARCHAR(12) NOT NULL,"
