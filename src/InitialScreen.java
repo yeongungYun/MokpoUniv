@@ -12,7 +12,7 @@ public class InitialScreen extends JPanel
     public InitialScreen(MainFrame mainFrame)
     {
         setLayout(null);
-        imagePanel = new ImagePanel("img/MainImage.png");
+        imagePanel = new ImagePanel("img/TrueImage.png");
         setBackground(Color.LIGHT_GRAY);
 
         listener = new InitialScreenListener(mainFrame);
